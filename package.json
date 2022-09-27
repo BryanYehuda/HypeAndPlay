@@ -1,0 +1,30 @@
+{
+    "name": "hypeandplay",
+    "version": "1.0.0",
+    "description": "Ini adalah Repository yang digunakan untuk menyimpan hasil pembuatan website untuk Hype And Play",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "lint": "eslint ./",
+        "lint-fix": "eslint --fix ./",
+        "build-image": "node sharp.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/BryanYehuda/HypeAndPlay.git"
+    },
+    "author": "Jupiter Development",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/BryanYehuda/HypeAndPlay/issues"
+    },
+    "homepage": "https://github.com/BryanYehuda/HypeAndPlay#readme",
+    "devDependencies": {
+        "eslint": "^8.24.0",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-plugin-import": "^2.26.0"
+    },
+    "dependencies": {
+        "lazysizes": "^5.3.2"
+    }
+}
