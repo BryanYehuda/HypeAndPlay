@@ -54,6 +54,16 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
+    "PAGE_SIZE": 10,
+    "EXCEPTION_HANDLER": "common.exception_handler.custom_exception_handler",
+    # "EXCEPTION_HANDLER": "rest_framework.views.exception_handler",
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
+
+
 ROOT_URLCONF = 'hypeandplay.urls'
 
 TEMPLATES = [
