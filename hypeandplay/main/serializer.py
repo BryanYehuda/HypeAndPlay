@@ -23,6 +23,7 @@ class ProductSerializer(serializers.ModelSerializer):
         
 class ProductImageSerializer(serializers.Serializer):
     images = serializers.ListField(
-        child = serializers.ImageField()
+        child = serializers.ImageField(use_url = True),
+        required=False
     )
-    product = ProductSerializer
+    product = ProductSerializer()

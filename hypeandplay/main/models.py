@@ -22,8 +22,6 @@ class Promo(models.Model):
         return f"{self.promo_name}"
 
 
-def get_image_url(instance, files):
-    return f"image/{instance.product_id.name}-{files}"
 
 
 class Product(models.Model):
@@ -40,6 +38,8 @@ class Product(models.Model):
     def __str__(self):
         return f"{self.name}"
 
+def get_image_url(instance, files):
+    return f"image/{instance.product_id.name}-{files}"
 
 class Image(models.Model):
     image = models.ImageField(upload_to=get_image_url)
