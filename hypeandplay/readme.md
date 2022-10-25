@@ -31,6 +31,13 @@
     manage.py migrate
     ```
 
+- Create Super Admin
+
+    ```
+    manage.py createsuperuser
+    ```
+
+
 - Activate Server
 
     ```
