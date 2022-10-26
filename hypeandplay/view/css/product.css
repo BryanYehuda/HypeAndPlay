@@ -19,14 +19,14 @@ html {
 }
 
 body {
-    background-color: #0E1118;
+    background-color: #10122b;
 }
 
 
 /* Navbar */
 
 .navbar {
-    background-color: #0E1118;
+    background-color: #10122b;
     padding: 10px 10px;
     width: 90%;
     margin-right: auto;
@@ -93,4 +93,104 @@ body {
     text-align: center;
     margin-right: auto;
     margin-left: auto;
+}
+
+
+/* Sidebar */
+
+#body-row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+#sidebar-container {
+    min-height: 100vh;
+    padding: 0;
+    margin-top: 100px;
+    margin-left: 40px;
+}
+
+.sidebar-expanded {
+    width: 230px;
+}
+
+.sidebar-collapsed {
+    width: 60px;
+}
+
+#sidebar-container .list-group a {
+    height: 50px;
+    color: white;
+    font-family: excluded;
+    font-weight: 400;
+    font-size: 12px;
+    background-color: #10122b;
+}
+
+#sidebar-container .list-group .sidebar-submenu a {
+    height: 45px;
+    padding-left: 30px;
+    margin-left: 20px;
+    font-family: dm-sans;
+    font-weight: 400;
+    font-size: 12px;
+    background-color: #10122b;
+}
+
+.sidebar-separator-title {
+    background-color: #10122b;
+    margin-left: 16px;
+    margin-bottom: 50px;
+    font-family: excluded;
+    color: white;
+    font-weight: 400;
+    font-size: 15px;
+    height: 35px;
+}
+
+.sidebar-separator {
+    background-color: #10122b;
+    height: 25px;
+}
+
+.logo-separator {
+    background-color: #10122b;
+    height: 60px;
+}
+
+#sidebar-container .list-group .list-group-item[aria-expanded="false"] .submenu-icon::after {
+    content: " \f0d7";
+    font-family: FontAwesome;
+    display: inline;
+    text-align: right;
+    padding-left: 10px;
+}
+
+#sidebar-container .list-group .list-group-item[aria-expanded="true"] .submenu-icon::after {
+    content: " \f0da";
+    font-family: FontAwesome;
+    display: inline;
+    text-align: right;
+    padding-left: 10px;
+}
+
+.separator-subtitle {
+    background-color: #10122b;
+    margin-left: 10px;
+    font-family: dm-sans;
+    color: white;
+    font-weight: 400;
+    font-size: 15px;
+    display: inline;
+}
+
+.form-control-sidebar {
+    padding-left: 0px!important;
+    margin-left: 18px;
+}
+
+.form-control-sidebar-font {
+    font-family: dm-sans;
+    font-weight: 400;
+    font-size: 12px;
 }
