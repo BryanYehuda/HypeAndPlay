@@ -35,7 +35,7 @@ body {
 
 .navbar-brand img {
     width: 150px;
-    margin-left: -8px;
+    margin-left: 5px;
 }
 
 .nav-link {
@@ -95,23 +95,39 @@ body {
     margin-left: auto;
 }
 
+.sidebar-separator-title {
+    background-color: #10122b;
+    margin-bottom: 50px;
+    font-family: excluded;
+    color: white;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.separator-subtitle {
+    font-family: 'DM Sans';
+    color: white;
+    font-weight: 400;
+    font-size: 15px;
+    margin-left: 2px;
+}
+
 
 /* Sidebar */
 
-#body-row {
-    margin-left: 0;
-    margin-right: 0;
-}
-
 #sidebar-container {
-    min-height: 100vh;
     padding: 0;
-    margin-top: 100px;
-    margin-left: 40px;
+    margin-top: 50px;
 }
 
-.sidebar-expanded {
-    width: 230px;
+.sidebar-left {
+    width: 18%;
+    margin-left: 5%;
+    margin-right: 2%;
+}
+
+.content-right {
+    width: 75%;
 }
 
 .sidebar-collapsed {
@@ -131,31 +147,10 @@ body {
     height: 45px;
     padding-left: 30px;
     margin-left: 20px;
-    font-family: dm-sans;
+    font-family: 'DM Sans';
     font-weight: 400;
     font-size: 12px;
     background-color: #10122b;
-}
-
-.sidebar-separator-title {
-    background-color: #10122b;
-    margin-left: 16px;
-    margin-bottom: 50px;
-    font-family: excluded;
-    color: white;
-    font-weight: 400;
-    font-size: 15px;
-    height: 35px;
-}
-
-.sidebar-separator {
-    background-color: #10122b;
-    height: 25px;
-}
-
-.logo-separator {
-    background-color: #10122b;
-    height: 60px;
 }
 
 #sidebar-container .list-group .list-group-item[aria-expanded="false"] .submenu-icon::after {
@@ -174,23 +169,32 @@ body {
     padding-left: 10px;
 }
 
-.separator-subtitle {
-    background-color: #10122b;
-    margin-left: 10px;
-    font-family: dm-sans;
-    color: white;
-    font-weight: 400;
-    font-size: 15px;
-    display: inline;
-}
-
 .form-control-sidebar {
     padding-left: 0px!important;
     margin-left: 18px;
 }
 
 .form-control-sidebar-font {
-    font-family: dm-sans;
+    font-family: 'DM Sans';
     font-weight: 400;
     font-size: 12px;
+}
+
+
+/* Card */
+
+.card-title {
+    font-family: 'DM Sans';
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.card-text {
+    font-family: 'DM Sans';
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.newline {
+    margin-top: 40px;
 }
