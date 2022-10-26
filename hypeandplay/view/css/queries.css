@@ -1,0 +1,142 @@
+@media screen and (max-width: 1250px) {
+    .card-title {
+        font-size: 16px;
+    }
+    .card-text {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .card-title {
+        font-size: 15px;
+    }
+    .card-text {
+        font-size: 13px;
+    }
+    .navbar-expand-lg .navbar-nav .nav-link {
+        padding-right: 0!important;
+        padding-left: 0!important;
+    }
+}
+
+@media screen and (max-width: 997px) {
+    .card-title {
+        font-size: 14px;
+        margin-bottom: 0!important;
+    }
+    .card-text {
+        font-size: 12px;
+    }
+    .newline {
+        margin-top: 35px;
+    }
+    .page-link {
+        font-size: 14px;
+    }
+    .card-body {
+        padding: 1rem;
+    }
+}
+
+@media screen and (max-width: 860px) {
+    .card-title {
+        font-size: 13px;
+        margin-bottom: 0!important;
+    }
+    .card-text {
+        font-size: 11px;
+    }
+    .newline {
+        margin-top: 35px;
+    }
+    .card-body {
+        padding: 0.75rem;
+    }
+    .page-link {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .center-on-mobile {
+        margin-left: 20%;
+        margin-right: 10%;
+    }
+    .newline {
+        margin-top: 30px;
+    }
+    .newline-on-mobile {
+        margin-top: 30px;
+    }
+    .card-title {
+        font-size: 18px;
+    }
+    .card-text {
+        font-size: 16px;
+    }
+    .sidebar-separator-title {
+        font-size: 14px;
+    }
+    .separator-subtitle {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 670px) {
+    .center-on-mobile {
+        margin-left: 18%;
+        margin-right: 5%;
+    }
+    .newline {
+        margin-top: 25px;
+    }
+    .newline-on-mobile {
+        margin-top: 25px;
+    }
+    .card-title {
+        font-size: 16px;
+    }
+    .card-text {
+        font-size: 14px;
+    }
+    .sidebar-separator-title {
+        font-size: 13px;
+    }
+    .separator-subtitle {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .card-title {
+        font-size: 15px;
+    }
+    .card-text {
+        font-size: 13px;
+    }
+    .sidebar-separator-title {
+        font-size: 12px;
+    }
+    .separator-subtitle {
+        font-size: 12px;
+    }
+    .card {
+        width: 110%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .card-title {
+        font-size: 14px;
+    }
+    .card-text {
+        font-size: 12px;
+    }
+    .sidebar-separator-title {
+        font-size: 11px;
+    }
+    .separator-subtitle {
+        font-size: 11px;
+    }
+}
