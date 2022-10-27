@@ -72,7 +72,7 @@
                     <a class="nav-link" href="event.html">Event</a>
                 </li>
             </ul>
-            <form class="form-inline d-none d-lg-block">
+            <form class="form-inline margin-on-mobile">
                 <input class="form-control form-control-sm mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-light btn-sm my-2 my-sm-0 btn-navbar" type="submit"><i class="bi bi-search"></i></button>
             </form>
@@ -87,11 +87,38 @@
             <div class="item"><img src="../img/common/AdBanner.png" class="img-fluid" alt="ad-banner"></div>
             <div class="item"><img src="../img/common/AdBanner.png" class="img-fluid" alt="ad-banner"></div>
         </div>
-        <div class="list-group-item sidebar-separator-title d-flex align-items-center menu-collapsed">
-            <p>Home<i class="bi bi-caret-right" style="vertical-align: -0.1em!important; margin-left: 2px;"></i><span class="separator-subtitle">Category</span></p>
+        <div class="row">
+            <div class="col-6">
+                <div class="list-group-item sidebar-separator-title d-flex align-items-center menu-collapsed">
+                    <p>Home<i class="bi bi-caret-right" style="vertical-align: -0.1em!important; margin-left: 2px;"></i><span class="separator-subtitle">Category</span></p>
+                </div>
+            </div>
+            <div class="col-6 d-md-none">
+                <button type="button" class="btn btn-outline-light float-right" data-toggle="modal" data-target="#filter">
+                    Filter<i class="bi bi-search" style="margin-left: 5px;"></i>
+                </button>
+            </div>
         </div>
     </div>
     <!-- Ad Banner Ends -->
+
+    <!-- Modal Starts -->
+    <div class="modal fade" id="filter" tabindex="-1" role="dialog" aria-labelledby="filterLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="filterLabel">Filter</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Ends -->
 
     <!-- Sidebar Starts -->
     <div id="sidebar-container">
