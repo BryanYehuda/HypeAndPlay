@@ -7,6 +7,27 @@
     }
 }
 
+@media screen and (max-width: 1170px) {
+    .product-title {
+        font-size: 28px;
+    }
+    .product-price {
+        font-size: 18px;
+    }
+    .product-detail {
+        font-size: 14px;
+    }
+    .product-stock {
+        font-size: 17px;
+    }
+    .product-category {
+        font-size: 17px;
+    }
+    .product-description {
+        font-size: 17px;
+    }
+}
+
 @media screen and (max-width: 1100px) {
     .card-title {
         font-size: 15px;
@@ -40,6 +61,24 @@
     h1 {
         font-size: 2.3rem!important;
     }
+    .product-title {
+        font-size: 26px;
+    }
+    .product-price {
+        font-size: 16px;
+    }
+    .product-detail {
+        font-size: 13px;
+    }
+    .product-stock {
+        font-size: 16px;
+    }
+    .product-category {
+        font-size: 16px;
+    }
+    .product-description {
+        font-size: 16px;
+    }
 }
 
 @media screen and (max-width: 860px) {
@@ -58,6 +97,12 @@
     }
     .page-link {
         font-size: 13px;
+    }
+    .product-category {
+        font-size: 15px;
+    }
+    .product-description {
+        font-size: 15px;
     }
 }
 
@@ -86,6 +131,9 @@
     }
     h1 {
         font-size: 2rem!important;
+    }
+    .product-title {
+        margin-bottom: 20px;
     }
 }
 
