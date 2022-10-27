@@ -1,0 +1,47 @@
+.background {
+    margin-top: 12%;
+}
+
+.herologo {
+    width: 80%;
+}
+
+.divider:after,
+.divider:before {
+    flex: 1;
+    height: 1px;
+    background: #eee;
+}
+
+.h-custom {
+    height: calc(100% - 20px);
+}
+
+@media (max-width: 1100px) {
+    .h1 {
+        font-size: 2rem;
+    }
+    .form-control-lg {
+        font-size: 1rem;
+    }
+    .btn-lg {
+        font-size: 1rem;
+        padding: 0.25rem 0.5rem;
+    }
+}
+
+@media (max-width: 1100px) {
+    .h1 {
+        font-size: 1.8rem;
+    }
+    .btn-lg {
+        font-size: 1rem;
+        padding: 0.25rem 0.5rem;
+    }
+}
+
+@media (max-width: 450px) {
+    .h-custom {
+        height: 100%;
+    }
+}
