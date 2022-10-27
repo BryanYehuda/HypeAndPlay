@@ -112,9 +112,129 @@ label {
     background-color: transparent;
 }
 
+@media screen and (max-width: 1180px) {
+    .text-title {
+        font-size: 21px;
+    }
+    .dropdown-menu {
+        font-size: 0.9rem;
+    }
+    .btn {
+        font-size: 0.9rem;
+    }
+    .form-control {
+        font-size: 0.9rem;
+    }
+    th {
+        font-size: 15px;
+    }
+    td {
+        font-size: 15px;
+    }
+    .page-link {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .text-title {
+        font-size: 19px;
+    }
+    .dropdown-menu {
+        font-size: 0.8rem;
+    }
+    .btn {
+        font-size: 0.8rem;
+    }
+    .form-control {
+        font-size: 0.8rem;
+    }
+    th {
+        font-size: 14px;
+    }
+    td {
+        font-size: 14px;
+    }
+    .page-link {
+        font-size: 14px;
+    }
+}
+
 @media screen and (max-width: 992px) {
     .main-pages {
         width: 95%;
         margin-left: 2.5%;
+    }
+    .dropdown-menu {
+        font-size: 0.9rem;
+    }
+    .btn {
+        font-size: 0.9rem;
+    }
+    .form-control {
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 740px) {
+    .text-title {
+        font-size: 18px;
+    }
+    .dropdown-menu {
+        font-size: 0.8rem;
+    }
+    .btn {
+        font-size: 0.8rem;
+    }
+    .form-control {
+        font-size: 0.8rem;
+    }
+    th {
+        font-size: 13px;
+    }
+    td {
+        font-size: 13px;
+    }
+    .page-link {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .text-title {
+        font-size: 17px;
+    }
+    th {
+        font-size: 12px;
+    }
+    td {
+        font-size: 12px;
+    }
+    .page-link {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 475px) {
+    .text-title {
+        font-size: 15px;
+    }
+    .dropdown-menu {
+        font-size: 0.7rem;
+    }
+    .btn {
+        font-size: 0.7rem;
+    }
+    .form-control {
+        font-size: 0.7rem;
+    }
+    th {
+        font-size: 11px;
+    }
+    td {
+        font-size: 11px;
+    }
+    .page-link {
+        font-size: 11px;
     }
 }
