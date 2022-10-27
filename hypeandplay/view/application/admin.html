@@ -49,7 +49,7 @@
     <div class="wrapper">
         <!-- Slider Profile Admin Starts -->
 
-        <div class="slider " id="sliders">
+        <div class="slider d-none d-lg-block" id="sliders">
             <!--Profile staff Starts-->
             <div class="slider-head">
                 <div class="text-center layzload">
@@ -83,11 +83,22 @@
 
                 <!-- Table Title Starts -->
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-3">
                         <h2 class="text-title">Product List</h2>
                     </div>
-                    <div class="col-6">
+                    <div class="col-9">
                         <button type="button" class="btn btn-success float-right">Add Product<i class="bi bi-plus" style="margin-left: 5px;"></i></button>
+                        <button class="btn btn-danger float-right d-lg-none" style="margin-right: 5px;">Logout</button>
+                        <div class="dropdown dropdown-table">
+                            <button class="btn btn-secondary dropdown-toggle float-right d-lg-none" style="margin-right: 5px;" type="button" id="type" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Type
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="tpe">
+                                <a class="dropdown-item" href="#">Product</a>
+                                <a class="dropdown-item" href="#">Promo</a>
+                                <a class="dropdown-item" href="#">Event</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- Table Title Ends -->
@@ -196,43 +207,15 @@
                 <!-- Table Data Ends -->
 
                 <!-- Next Table Starts-->
-                <label class="pt-2 pl-3 font-weight-bold">1-5 of xx</label>
-                <div class="container">
-                    <div class="col-md-4 nextbutton pt-1">
-                        <nav class="pagination-outer font-weight-bold" aria-label="Page navigation">
-                            <label>You're on page</label>
-                            <!-- Page Number Starts-->
-                            <select class="custom-select my-select mr-4 font-weight-bold" style="width: 20%; height: 35px;">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
-                                <option>10</option>
-                            </select>
-                            <!-- Page Number Ends-->
-
-                            <!-- Next Start-->
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a href="admin.html" class="page-link" aria-label="Previous">
-                                        <span aria-hidden="true">«</span>
-                                    </a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="admin.html" class="page-link" aria-label="Next">
-                                        <span aria-hidden="true">»</span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <!-- Next Ends-->
-                        </nav>
-                    </div>
-                </div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-end">
+                        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    </ul>
+                </nav>
                 <!-- Next Table Ends-->
 
             </div>
