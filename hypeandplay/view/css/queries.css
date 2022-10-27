@@ -135,6 +135,9 @@
     .product-title {
         margin-bottom: 20px;
     }
+    .newline-product {
+        margin-top: 30px;
+    }
 }
 
 @media screen and (max-width: 670px) {
