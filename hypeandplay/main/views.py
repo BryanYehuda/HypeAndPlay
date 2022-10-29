@@ -27,10 +27,11 @@ class ProductViewset(viewsets.ModelViewSet):
 
     queryset = models.Product.objects.all()
 
-    filter_class = ProductFilter
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    filterset_class = ProductFilter
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
     filterset_fields = ["category",'stock', 'price']
     search_fields = ['name']
+    ordering_fields = ("price",)
     
     def create(self, request, *args, **kwargs):
         
@@ -60,11 +61,15 @@ class ProductViewset(viewsets.ModelViewSet):
         
         product.save()
         
+        res_img = []
         for image in images:
             img = models.Image.objects.create(image = image, product_id = product)
+            res_img.append(img.__str__())
             img.save()
         
-        return Response(serial.data)
+        data['images'] = res_img
+        
+        return Response(data)
     
     def get_serializer_class(self):
         return self.serializer_class.get(self.action, self.serializer_class["default"])
