@@ -1,9 +1,10 @@
 from django.shortcuts import render
-from rest_framework import viewsets
+from rest_framework import viewsets, filters
+from django_filters.rest_framework import DjangoFilterBackend
 from . import models
 from . import serializer
 from rest_framework.response import Response
-import uuid
+from .filters import ProductFilter
 
 # Create your views here.
 
@@ -26,6 +27,11 @@ class ProductViewset(viewsets.ModelViewSet):
 
     queryset = models.Product.objects.all()
 
+    filter_class = ProductFilter
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    filterset_fields = ["category",'stock', 'price']
+    search_fields = ['name']
+    
     def create(self, request, *args, **kwargs):
         
         images = request.data.pop('images', [])
