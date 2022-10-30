@@ -6,6 +6,8 @@ from . import serializer
 from rest_framework.response import Response
 from .filters import ProductFilter
 
+from drf_spectacular.utils import extend_schema
+
 # Create your views here.
 
 
@@ -68,6 +70,7 @@ class ProductViewset(viewsets.ModelViewSet):
             img.save()
         
         data['images'] = res_img
+        data['product']['id'] = product.id
         
         return Response(data)
     
