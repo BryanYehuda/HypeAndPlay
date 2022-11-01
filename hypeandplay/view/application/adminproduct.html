@@ -88,7 +88,7 @@
                         <h2 class="text-title">Product List</h2>
                     </div>
                     <div class="col-7">
-                        <button type="button" class="btn btn-success float-right">Add Product<i class="bi bi-plus" style="margin-left: 5px;"></i></button>
+                        <button type="button" class="btn btn-success float-right" onclick="location.href='adminproductupload.html'">Add Product<i class="bi bi-plus" style="margin-left: 5px;"></i></button>
                         <div class="dropdown dropdown-table">
                             <button class="btn btn-primary dropdown-toggle float-right d-lg-none" style="margin-right: 5px;" type="button" id="type" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Menu
@@ -118,8 +118,8 @@
                         </div>
                     </div>
                     <form class="form-inline">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-light my-2 my-sm-0 btn-navbar d-none d-sm-block" type="submit"><i class="bi bi-search"></i></button>
+                        <input class="form-control mr-sm-2 searchQuery" type="search"  name="searchQuery" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-light my-2 my-sm-0 btn-navbar d-none d-sm-block" type="submit" onclick="event.preventDefault(); searchByName()"><i class="bi bi-search"></i></button>
                     </form>
                 </div>
                 <!-- Table Search Ends -->
@@ -137,59 +137,7 @@
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td class="align-middle"><img src="../img/admin/product.png"></td>
-                                <td class="align-middle">Name Of The Product</td>
-                                <td class="align-middle">Rp. 999.999</td>
-                                <td class="align-middle">999</td>
-                                <td class="align-middle">
-                                    <input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger">
-                                </td>
-                                <td class="align-middle">
-                                    <a><i class="bi bi-pencil ml-1"></i></a>
-                                    <a><i class="bi bi-trash"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle"><img src="../img/admin/product.png"></td>
-                                <td class="align-middle">Name Of The Product</td>
-                                <td class="align-middle">Rp. 999.999</td>
-                                <td class="align-middle">999</td>
-                                <td class="align-middle">
-                                    <input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger">
-                                </td>
-                                <td class="align-middle">
-                                    <a><i class="bi bi-pencil ml-1"></i></a>
-                                    <a><i class="bi bi-trash"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle"><img src="../img/admin/product.png"></td>
-                                <td class="align-middle">Name Of The Product</td>
-                                <td class="align-middle">Rp. 999.999</td>
-                                <td class="align-middle">999</td>
-                                <td class="align-middle">
-                                    <input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger">
-                                </td>
-                                <td class="align-middle">
-                                    <a><i class="bi bi-pencil ml-1"></i></a>
-                                    <a><i class="bi bi-trash"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle"><img src="../img/admin/product.png"></td>
-                                <td class="align-middle">Name Of The Product</td>
-                                <td class="align-middle">Rp. 999.999</td>
-                                <td class="align-middle">999</td>
-                                <td class="align-middle">
-                                    <input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger">
-                                </td>
-                                <td class="align-middle">
-                                    <a><i class="bi bi-pencil ml-1"></i></a>
-                                    <a><i class="bi bi-trash"></i></a>
-                                </td>
-                            </tr>
+                        <tbody class="produkListItem">
                             <tr>
                                 <td class="align-middle"><img src="../img/admin/product.png"></td>
                                 <td class="align-middle">Name Of The Product</td>
@@ -233,6 +181,109 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
     <!-- Script Ends -->
+    <script>
+        const status = response => {
+            if(response.status !== 200){    
+                console.log("Error : " + response.status);
+                return Promise.reject(new Error(response.statusText));
+            }else{
+                return Promise.resolve(response);
+            }
+        }
+
+        const json = response => {
+            return response.json();
+        }
+
+        const error = error => {
+            console.log("Error" + error);
+        }
+        
+        const fetchAPI = (url, method) => {
+            var requestOptions = {
+                method: method,
+                redirect: 'follow'
+            };
+
+            return fetch(url)
+            .then(status)
+            .then(json)
+            .catch(error)
+        }
+
+        const showDataProduct = (result) => {
+            let allProduct = ``;
+            result.forEach((data) => {
+                const statusProduct = data.status == true ? "checked" : "";
+                allProduct +=`
+                    <tr>
+                        <td class="align-middle"><img src="../img/admin/product.png"></td>
+                        <td class="align-middle">${data.name}</td>
+                        <td class="align-middle">${data.price}</td>
+                        <td class="align-middle">${data.stock}</td>
+                        <td class="align-middle">
+                            <input type="checkbox" class="statusProduct" ${statusProduct} data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger">
+                        </td>
+                        <td class="align-middle">
+                            <a><i class="bi bi-pencil ml-1"></i></a>
+                            <a><i class="bi bi-trash" style="cursor:pointer" onclick="deleteProduct('${data.id}')"></i></a>
+                        </td>
+                    </tr>
+                `;
+            });
+            document.querySelector(".produkListItem").innerHTML = allProduct;
+        }
+
+        const deleteProduct = id => {
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+
+            var raw = `{id : ${id}}`;
+
+            var requestOptions = {
+                method: 'DELETE',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+
+            fetch(`http://127.0.0.1:8000/product/${id}`, requestOptions)
+            .then(response => response.text())
+            .then(result => {
+                location.reload();
+            })
+            .catch(error => console.log('error', error));
+        }
+
+        const searchByName = (e) => {
+            const inputUser = document.querySelector(".searchQuery").value;
+
+            if(inputUser === ""){
+                return alert("Masukkan judul yang dicari");
+            }else{
+                fetchAPI(`http://127.0.0.1:8000/product/?search=${inputUser}`, "GET")
+                .then(result => {
+                    console.log(result.results)
+                    showDataProduct(result.results);
+                    $(function() {
+                        $('.statusProduct').bootstrapToggle();
+                    })
+                })
+                .catch(error => console.log('error', error));
+            }
+        }
+
+        
+
+        fetchAPI("http://127.0.0.1:8000/product/", "GET")
+        .then(result => {
+            showDataProduct(result.results);
+            $(function() {
+                $('.statusProduct').bootstrapToggle();
+            })
+        })
+        .catch(error => console.log('error', error));
+    </script>
 
 </body>
 
