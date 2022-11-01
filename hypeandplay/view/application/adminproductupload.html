@@ -91,7 +91,77 @@
                 <!-- Table Title Ends -->
 
                 <!-- Table Form Starts -->
-                <div class="table-form">
+                <form action="http://127.0.0.1:8000/product/" target="_blank" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-3">
+                            <p class="product-insert-title">Product Name</p>
+                        </div>
+                        <div class="col-md-8 col-9">
+                            <input class="form-control" name="name" type="text" placeholder="Product Name">
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-3">
+                            <p class="product-insert-title">Category Name</p>
+                        </div><br>
+                        <div class="col-8">
+                            <div class="dropdown dropdown-table">
+                                <!-- <button class="btn btn-outline-light dropdown-toggle float-left" type="button" id="type" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Choose Category
+                                </button> -->
+                                <select class="btn btn-outline-light dropdown-toggle" name="category" id="category">
+                                    <option value="1">Category 1</option>
+                                    <option value="2">Category 4</option>
+                                    <option value="3">Category 3</option>
+                                    <option value="4">Category 2</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-3">
+                            <p class="product-insert-title">Upload Photo</p>
+                        </div>
+                        <div class="col-md-8 col-9">
+                            
+                            <input class="btn btn-outline-light" type="file" name="images" id="file">
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-3">
+                            <p class="product-insert-title">Description</p>
+                        </div>
+                        <div class="col-md-8 col-9">
+                            <textarea class="form-control" id="exampleFormControlTextarea1" name="description" rows="10" placeholder="Product Description"></textarea>
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-3">
+                            <p class="product-insert-title">Product Price</p>
+                        </div>
+                        <div class="col-md-8 col-9">
+                            <input class="form-control" name="price" type="text" placeholder="Product Price">
+                        </div>
+                    </div><br>
+                    <div class="row">
+                        <div class="col-3">
+                            <p class="product-insert-title">Product Stock</p>
+                        </div>
+                        <div class="col-md-8 col-9">
+                            <input class="form-control" name="stock" type="text" placeholder="Product Stock">
+                        </div>
+                    </div><br>
+                    <input class="form-control" name="new_release" value="true" type="hidden">
+                    <input class="form-control" name="status" value="true" type="hidden">
+                    <input class="form-control" name="promo" value="1" type="hidden">
+                    <div class="row">
+                        <div class="offset-3 offset-lg-3 offset-md-3 offset-sm-3 col-lg-2 col-md-3 col-sm-4 col-4">
+                            <input onclick="window.location.href = 'http://127.0.0.1:5500/hypeandplay/view/application/adminproduct.html'" type="submit" value="Submit" class="btn btn-block btn-success">
+                        </div>
+                    </div>
+                    
+                </form>
+                <!-- <div class="table-form">
                     <div class="row">
                         <div class="col-3">
                             <p class="product-insert-title">Product Name</p>
@@ -122,7 +192,8 @@
                             <p class="product-insert-title">Upload Photo</p>
                         </div>
                         <div class="col-md-8 col-9">
-                            <button class="btn btn-outline-light">Upload Photo</button>
+                            
+                            <input class="btn btn-outline-light" type="file" name="file" id="file">
                         </div>
                     </div><br>
                     <div class="row">
@@ -157,7 +228,7 @@
                             <button class="btn btn-block btn-danger">Cancel</button>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
 
