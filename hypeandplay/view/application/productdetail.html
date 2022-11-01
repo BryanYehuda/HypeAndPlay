@@ -97,41 +97,7 @@
 
     <!-- Product Starts -->
     <div class="product-container">
-        <div class="row">
-            <div class="col-12 col-md-6">
-                <div class="product-carousel owl-carousel owl-theme text-center">
-                    <div class="item"><img src="../img/productdetail/Product.png" class="img-fluid" alt="product"></div>
-                    <div class="item"><img src="../img/productdetail/Product.png" class="img-fluid" alt="product"></div>
-                    <div class="item"><img src="../img/productdetail/Product.png" class="img-fluid" alt="product"></div>
-                    <div class="item"><img src="../img/productdetail/Product.png" class="img-fluid" alt="product"></div>
-                </div>
-                <div class="row newline-product">
-                    <div class="col-3">
-                        <img src="../img/productdetail/Product.png" class="img-fluid" alt="product">
-                    </div>
-                    <div class="col-3">
-                        <img src="../img/productdetail/Product.png" class="img-fluid" alt="product">
-                    </div>
-                    <div class="col-3">
-                        <img src="../img/productdetail/Product.png" class="img-fluid" alt="product">
-                    </div>
-                    <div class="col-3">
-                        <img src="../img/productdetail/Product.png" class="img-fluid" alt="product">
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-6">
-                <p class="product-title newline-product">Name Of The Product</p>
-                <p class="product-price">Rp. 999.999</p>
-                <p class="product-detail">Detail</p>
-                <p class="product-stock">Stock : 999</p>
-                <p class="product-category">Category : Category</p>
-                <p class="product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras id urna in dolor porttitor bibendum. Fusce pretium at velit sit amet accumsan. Maecenas ullamcorper vestibulum mauris a dictum. Aliquam convallis at metus eu faucibus. Sed quis
-                    scelerisque nunc. Praesent in sem vitae enim vehicula scelerisque sit amet sed leo. Suspendisse eget ante vitae nulla hendrerit faucibus. Suspendisse interdum lectus quis bibendum pellentesque. Cras faucibus finibus nisi vel ullamcorper.
-                    Cras convallis est ac luctus mollis. Mauris mauris leo, pulvinar et imperdiet sit amet, semper sed velit. Nulla ut augue vel nulla rhoncus fringilla a id erat. Integer id mi libero. Lorem ipsum dolor sit amet, consectetur adipiscing
-                    elit. Nunc fringilla nisi sed massa efficitur sagittis. Vivamus aliquam lobortis nisl, nec scelerisque nisi eleifend eu. Fusce mattis consectetur nulla, non vulputate felis dignissim quis. Vivamus auctor ex lorem, eget fringilla nulla
-                    viverra sed. Nunc sollicitudin venenatis lorem, euismod varius dui fermentum sed. </p>
-            </div>
+        <div class="row produkItem">
         </div>
     </div>
     <!-- Product Ends -->
@@ -180,6 +146,81 @@
         })
     </script>
     <!-- Carousel Script Ends -->
+    <script>
+        const status = response => {
+            if(response.status !== 200){    
+                console.log("Error : " + response.status);
+                return Promise.reject(new Error(response.statusText));
+            }else{
+                return Promise.resolve(response);
+            }
+        }
+
+        const json = response => {
+            return response.json();
+        }
+
+        const error = error => {
+            console.log("Error" + error);
+        }
+        
+        const fetchAPI = (url, method) => {
+            var requestOptions = {
+                method: method,
+                redirect: 'follow'
+            };
+
+            return fetch(url)
+            .then(status)
+            .then(json)
+            .catch(error)
+        }
+
+        const showDataProduct = (result) => {
+            let allProduct = `
+                <div class="col-12 col-md-6 ">
+                    <div class="product-carousel owl-carousel owl-theme text-center">
+                        <div class="item"><img src="../img/productdetail/Product.png" class="img-fluid" alt="product"></div>
+                        <div class="item"><img src="../img/productdetail/Product.png" class="img-fluid" alt="product"></div>
+                        <div class="item"><img src="../img/productdetail/Product.png" class="img-fluid" alt="product"></div>
+                        <div class="item"><img src="../img/productdetail/Product.png" class="img-fluid" alt="product"></div>
+                    </div>
+                    <div class="row newline-product">
+                        <div class="col-3">
+                            <img src="../img/productdetail/Product.png" class="img-fluid" alt="product">
+                        </div>
+                        <div class="col-3">
+                            <img src="../img/productdetail/Product.png" class="img-fluid" alt="product">
+                        </div>
+                        <div class="col-3">
+                            <img src="../img/productdetail/Product.png" class="img-fluid" alt="product">
+                        </div>
+                        <div class="col-3">
+                            <img src="../img/productdetail/Product.png" class="img-fluid" alt="product">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 ">
+                    <p class="product-title newline-product">${result.name}</p>
+                    <p class="product-price">Rp. ${result.price}</p>
+                    <p class="product-detail">Detail</p>
+                    <p class="product-stock">Stock : ${result.price}</p>
+                    <p class="product-category">Category : Category</p>
+                    <p class="product-description">${result.description}</p>
+                </div>
+            `;
+            document.querySelector(".produkItem").innerHTML = allProduct;
+        }
+        
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const id = urlParams.get('id');
+        fetchAPI(`http://127.0.0.1:8000/product/${id}`, "GET")
+        .then(result => {
+            showDataProduct(result);
+        })
+        .catch(error => console.log('error', error));
+    </script>
 </body>
 
 
