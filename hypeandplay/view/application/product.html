@@ -139,15 +139,6 @@
                         </div>
                     </a>
                     <div id='category' class="collapse sidebar-submenu">
-                        <a href="#" class="list-group-item list-group-item-action text-white">
-                            <span class="menu-collapsed">Category 1</span>
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action text-white">
-                            <span class="menu-collapsed">Category 2</span>
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action text-white">
-                            <span class="menu-collapsed">Category 3</span>
-                        </a>
                     </div>
                     <a href="#prices" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="d-flex w-100 justify-content-start align-items-center">
@@ -273,6 +264,28 @@
             document.querySelector(".produkListItem").innerHTML = allProduct;
         }
 
+        const showDataProductFilter = (result, category) => {
+            let allProduct = ``;
+            result.forEach((data) => {
+                if(data.category == category){
+                    allProduct +=`
+                    <div class="col-6 col-md-3">
+                        <a href="productdetail.html?id=${data.id}" class="product-link">
+                            <div class="card h-100">
+                                <img class="card-img-top" src="../img/common/ProductImage.png" alt="Product Image">
+                                <div class="card-body">
+                                    <h5 class="card-title">${data.name}</h5>
+                                    <p class="card-text">Rp ${data.price}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                `;
+                }
+            });
+            document.querySelector(".produkListItem").innerHTML = allProduct;
+        }
+
         const searchByName = () => {
             const inputUser = document.querySelector(".searchQuery").value;
 
@@ -288,11 +301,38 @@
             }
         }
 
+        const searchByCat = (category) => {
+            fetchAPI("http://127.0.0.1:8000/product/", "GET")
+            .then(result => {
+                showDataProductFilter(result.results, category);
+            })
+            .catch(error => console.log('error', error));
+        }
+
+        const showcategory = (result) => {
+            let allCategory = ``;
+            result.forEach((data) => {
+                allCategory +=`
+                    <a style="cursor:pointer" class="list-group-item list-group-item-action text-white" onclick="event.preventDefault();searchByCat(${data.id})">
+                        <span class="menu-collapsed">${data.name_category}</span>
+                    </a>
+                `;
+            });
+            document.querySelector("#category").innerHTML = allCategory;
+        }
+
         
 
         fetchAPI("http://127.0.0.1:8000/product/", "GET")
         .then(result => {
             showDataProduct(result.results);
+        })
+        .catch(error => console.log('error', error));
+
+        fetchAPI("http://127.0.0.1:8000/category/", "GET")
+        .then(result => {
+            // console.log(result.results)
+            showcategory(result.results);
         })
         .catch(error => console.log('error', error));
     </script>
