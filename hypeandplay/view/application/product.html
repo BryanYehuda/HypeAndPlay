@@ -73,8 +73,8 @@
                 </li>
             </ul>
             <form class="form-inline margin-on-mobile">
-                <input class="form-control form-control-sm mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-light btn-sm my-2 my-sm-0 btn-navbar" type="submit"><i class="bi bi-search"></i></button>
+                <input class="form-control form-control-sm mr-sm-2 searchQuery" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light btn-sm my-2 my-sm-0 btn-navbar" type="submit" onclick="event.preventDefault(); searchByName()"><i class="bi bi-search"></i></button>
             </form>
         </div>
     </nav>
@@ -168,7 +168,7 @@
             </div>
             <div class="float-right content-right center-on-mobile">
                 <!-- New Row -->
-                <div class="row" style="width: 93%;">
+                <div class="row produkListItem" style="width: 93%;">
                     <div class="col-6 col-md-3">
                         <a href="productdetail.html" class="product-link">
                             <div class="card">
@@ -180,180 +180,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-6 col-md-3">
-                        <a href="productdetail.html" class="product-link">
-                            <div class="card">
-                                <img class="card-img-top" src="../img/common/ProductImage.png" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Product Name</h5>
-                                    <p class="card-text">Rp. 999.999</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-3 newline-on-mobile">
-                        <a href="productdetail.html" class="product-link">
-                            <div class="card">
-                                <img class="card-img-top" src="../img/common/ProductImage.png" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Product Name</h5>
-                                    <p class="card-text">Rp. 999.999</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-3 newline-on-mobile">
-                        <a href="productdetail.html" class="product-link">
-                            <div class="card">
-                                <img class="card-img-top" src="../img/common/ProductImage.png" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Product Name</h5>
-                                    <p class="card-text">Rp. 999.999</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <!-- New Row -->
-                <div class="row newline" style="width: 93%;">
-                    <div class="col-6 col-md-3">
-                        <a href="productdetail.html" class="product-link">
-                            <div class="card">
-                                <img class="card-img-top" src="../img/common/ProductImage.png" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Product Name</h5>
-                                    <p class="card-text">Rp. 999.999</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <a href="productdetail.html" class="product-link">
-                            <div class="card">
-                                <img class="card-img-top" src="../img/common/ProductImage.png" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Product Name</h5>
-                                    <p class="card-text">Rp. 999.999</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-3 newline-on-mobile">
-                        <a href="productdetail.html" class="product-link">
-                            <div class="card">
-                                <img class="card-img-top" src="../img/common/ProductImage.png" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Product Name</h5>
-                                    <p class="card-text">Rp. 999.999</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-3 newline-on-mobile">
-                        <a href="productdetail.html" class="product-link">
-                            <div class="card">
-                                <img class="card-img-top" src="../img/common/ProductImage.png" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Product Name</h5>
-                                    <p class="card-text">Rp. 999.999</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <!-- New Row -->
-                <div class="row newline" style="width: 93%;">
-                    <div class="col-6 col-md-3">
-                        <a href="productdetail.html" class="product-link">
-                            <div class="card">
-                                <img class="card-img-top" src="../img/common/ProductImage.png" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Product Name</h5>
-                                    <p class="card-text">Rp. 999.999</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <a href="productdetail.html" class="product-link">
-                            <div class="card">
-                                <img class="card-img-top" src="../img/common/ProductImage.png" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Product Name</h5>
-                                    <p class="card-text">Rp. 999.999</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-3 newline-on-mobile">
-                        <a href="productdetail.html" class="product-link">
-                            <div class="card">
-                                <img class="card-img-top" src="../img/common/ProductImage.png" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Product Name</h5>
-                                    <p class="card-text">Rp. 999.999</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-3 newline-on-mobile">
-                        <a href="productdetail.html" class="product-link">
-                            <div class="card">
-                                <img class="card-img-top" src="../img/common/ProductImage.png" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Product Name</h5>
-                                    <p class="card-text">Rp. 999.999</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <!-- New Row -->
-                <div class="row newline" style="width: 93%;">
-                    <div class="col-6 col-md-3">
-                        <a href="productdetail.html" class="product-link">
-                            <div class="card">
-                                <img class="card-img-top" src="../img/common/ProductImage.png" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Product Name</h5>
-                                    <p class="card-text">Rp. 999.999</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-3">
-                        <a href="productdetail.html" class="product-link">
-                            <div class="card">
-                                <img class="card-img-top" src="../img/common/ProductImage.png" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Product Name</h5>
-                                    <p class="card-text">Rp. 999.999</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-3 newline-on-mobile">
-                        <a href="productdetail.html" class="product-link">
-                            <div class="card">
-                                <img class="card-img-top" src="../img/common/ProductImage.png" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Product Name</h5>
-                                    <p class="card-text">Rp. 999.999</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-6 col-md-3 newline-on-mobile">
-                        <a href="productdetail.html" class="product-link">
-                            <div class="card">
-                                <img class="card-img-top" src="../img/common/ProductImage.png" alt="Product Image">
-                                <div class="card-body">
-                                    <h5 class="card-title">Product Name</h5>
-                                    <p class="card-text">Rp. 999.999</p>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                    
                 </div>
                 <nav aria-label="Pagination Product">
                     <ul class="pagination justify-content-center newline">
@@ -395,6 +222,79 @@
                 }
             }
         })
+    </script>
+    <script>
+        const status = response => {
+            if(response.status !== 200){    
+                console.log("Error : " + response.status);
+                return Promise.reject(new Error(response.statusText));
+            }else{
+                return Promise.resolve(response);
+            }
+        }
+
+        const json = response => {
+            return response.json();
+        }
+
+        const error = error => {
+            console.log("Error" + error);
+        }
+        
+        const fetchAPI = (url, method) => {
+            var requestOptions = {
+                method: method,
+                redirect: 'follow'
+            };
+
+            return fetch(url)
+            .then(status)
+            .then(json)
+            .catch(error)
+        }
+
+        const showDataProduct = (result) => {
+            let allProduct = ``;
+            result.forEach((data) => {
+                allProduct +=`
+                    <div class="col-6 col-md-3">
+                        <a href="productdetail.html?id=${data.id}" class="product-link">
+                            <div class="card h-100">
+                                <img class="card-img-top" src="../img/common/ProductImage.png" alt="Product Image">
+                                <div class="card-body">
+                                    <h5 class="card-title">${data.name}</h5>
+                                    <p class="card-text">Rp ${data.price}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                `;
+            });
+            document.querySelector(".produkListItem").innerHTML = allProduct;
+        }
+
+        const searchByName = () => {
+            const inputUser = document.querySelector(".searchQuery").value;
+
+            if(inputUser === ""){
+                return alert("Masukkan judul yang dicari");
+            }else{
+                fetchAPI(`http://127.0.0.1:8000/product/?search=${inputUser}`, "GET")
+                .then(result => {
+                    console.log(result.results)
+                    showDataProduct(result.results);
+                })
+                .catch(error => console.log('error', error));
+            }
+        }
+
+        
+
+        fetchAPI("http://127.0.0.1:8000/product/", "GET")
+        .then(result => {
+            showDataProduct(result.results);
+        })
+        .catch(error => console.log('error', error));
     </script>
     <!-- Carousel Script Ends -->
 </body>
