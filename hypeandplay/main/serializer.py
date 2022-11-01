@@ -18,7 +18,7 @@ class PromoSerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Product
-        exclude = ("id",)
+        fields = "__all__"
         depth = 0
         
 class ProductImageSerializer(serializers.Serializer):
