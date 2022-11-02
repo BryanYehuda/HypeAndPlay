@@ -115,10 +115,11 @@
                             <a class="dropdown-item" href="#">Category 1</a>
                             <a class="dropdown-item" href="#">Category 2</a>
                             <a class="dropdown-item" href="#">Category 3</a>
+                            <a class="dropdown-item" href="#">Add Category</a>
                         </div>
                     </div>
                     <form class="form-inline">
-                        <input class="form-control mr-sm-2 searchQuery" type="search"  name="searchQuery" placeholder="Search" aria-label="Search">
+                        <input class="form-control mr-sm-2 searchQuery" type="search" name="searchQuery" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-light my-2 my-sm-0 btn-navbar d-none d-sm-block" type="submit" onclick="event.preventDefault(); searchByName()"><i class="bi bi-search"></i></button>
                     </form>
                 </div>
@@ -183,10 +184,10 @@
     <!-- Script Ends -->
     <script>
         const status = response => {
-            if(response.status !== 200){    
+            if (response.status !== 200) {
                 console.log("Error : " + response.status);
                 return Promise.reject(new Error(response.statusText));
-            }else{
+            } else {
                 return Promise.resolve(response);
             }
         }
@@ -198,7 +199,7 @@
         const error = error => {
             console.log("Error" + error);
         }
-        
+
         const fetchAPI = (url, method) => {
             var requestOptions = {
                 method: method,
@@ -206,16 +207,16 @@
             };
 
             return fetch(url)
-            .then(status)
-            .then(json)
-            .catch(error)
+                .then(status)
+                .then(json)
+                .catch(error)
         }
 
         const showDataProduct = (result) => {
             let allProduct = ``;
             result.forEach((data) => {
                 const statusProduct = data.status == true ? "checked" : "";
-                allProduct +=`
+                allProduct += `
                     <tr>
                         <td class="align-middle"><img src="../img/admin/product.png"></td>
                         <td class="align-middle">${data.name}</td>
@@ -248,41 +249,41 @@
             };
 
             fetch(`http://127.0.0.1:8000/product/${id}`, requestOptions)
-            .then(response => response.text())
-            .then(result => {
-                location.reload();
-            })
-            .catch(error => console.log('error', error));
+                .then(response => response.text())
+                .then(result => {
+                    location.reload();
+                })
+                .catch(error => console.log('error', error));
         }
 
         const searchByName = (e) => {
             const inputUser = document.querySelector(".searchQuery").value;
 
-            if(inputUser === ""){
+            if (inputUser === "") {
                 return alert("Masukkan judul yang dicari");
-            }else{
+            } else {
                 fetchAPI(`http://127.0.0.1:8000/product/?search=${inputUser}`, "GET")
-                .then(result => {
-                    console.log(result.results)
-                    showDataProduct(result.results);
-                    $(function() {
-                        $('.statusProduct').bootstrapToggle();
+                    .then(result => {
+                        console.log(result.results)
+                        showDataProduct(result.results);
+                        $(function() {
+                            $('.statusProduct').bootstrapToggle();
+                        })
                     })
-                })
-                .catch(error => console.log('error', error));
+                    .catch(error => console.log('error', error));
             }
         }
 
-        
+
 
         fetchAPI("http://127.0.0.1:8000/product/", "GET")
-        .then(result => {
-            showDataProduct(result.results);
-            $(function() {
-                $('.statusProduct').bootstrapToggle();
+            .then(result => {
+                showDataProduct(result.results);
+                $(function() {
+                    $('.statusProduct').bootstrapToggle();
+                })
             })
-        })
-        .catch(error => console.log('error', error));
+            .catch(error => console.log('error', error));
     </script>
 
 </body>
