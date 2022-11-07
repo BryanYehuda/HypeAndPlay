@@ -111,10 +111,9 @@
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           Category
                         </button>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Category 1</a>
-                            <a class="dropdown-item" href="#">Category 2</a>
-                            <a class="dropdown-item" href="#">Category 3</a>
+                        <div class="dropdown-menu dropdown-menu-right category" id="category" aria-labelledby="dropdownMenuButton">
+                            <a style="cursor:pointer" class="dropdown-item" >Coba</a>
+
                         </div>
                     </div>
                     <form class="form-inline">
@@ -137,21 +136,7 @@
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
-                        <tbody class="produkListItem">
-                            <tr>
-                                <td class="align-middle"><img src="../img/admin/product.png"></td>
-                                <td class="align-middle">Name Of The Product</td>
-                                <td class="align-middle">Rp. 999.999</td>
-                                <td class="align-middle">999</td>
-                                <td class="align-middle">
-                                    <input type="checkbox" checked data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger">
-                                </td>
-                                <td class="align-middle">
-                                    <a><i class="bi bi-pencil ml-1"></i></a>
-                                    <a><i class="bi bi-trash"></i></a>
-                                </td>
-                            </tr>
-                        </tbody>
+                        <tbody class="produkListItem"></tbody>
                     </table>
                 </div>
                 <!-- Table Data Ends -->
@@ -234,6 +219,31 @@
             document.querySelector(".produkListItem").innerHTML = allProduct;
         }
 
+        const showDataProductFilter = (result, category) => {
+            let allProduct = ``;
+            result.forEach((data) => {
+                if(data.category == category){
+                    const statusProduct = data.status == true ? "checked" : "";
+                    allProduct +=`
+                        <tr>
+                            <td class="align-middle"><img src="../img/admin/product.png"></td>
+                            <td class="align-middle">${data.name}</td>
+                            <td class="align-middle">${data.price}</td>
+                            <td class="align-middle">${data.stock}</td>
+                            <td class="align-middle">
+                                <input type="checkbox" class="statusProduct" ${statusProduct} data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger">
+                            </td>
+                            <td class="align-middle">
+                                <a><i class="bi bi-pencil ml-1"></i></a>
+                                <a><i class="bi bi-trash" style="cursor:pointer" onclick="deleteProduct('${data.id}')"></i></a>
+                            </td>
+                        </tr>
+                    `;
+                }
+            });
+            document.querySelector(".produkListItem").innerHTML = allProduct;
+        }
+
         const deleteProduct = id => {
             var myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
@@ -273,7 +283,28 @@
             }
         }
 
-        
+        const showcategory = (result) => {
+            let allCategory = ``;
+            result.forEach((data) => {
+                allCategory +=`
+                    <a style="cursor:pointer" class="dropdown-item" onclick="event.preventDefault();searchByCat(${data.id})">${data.name_category}</a>
+                `;
+            });
+
+            console.log(allCategory)
+            document.querySelector("#category").innerHTML = allCategory;
+        }
+
+        const searchByCat = (category) => {
+            fetchAPI("http://127.0.0.1:8000/product/", "GET")
+            .then(result => {
+                showDataProductFilter(result.results, category);
+                $(function() {
+                    $('.statusProduct').bootstrapToggle();
+                })
+            })
+            .catch(error => console.log('error', error));
+        }
 
         fetchAPI("http://127.0.0.1:8000/product/", "GET")
         .then(result => {
@@ -281,6 +312,14 @@
             $(function() {
                 $('.statusProduct').bootstrapToggle();
             })
+        })
+        .catch(error => console.log('error', error));
+
+        fetchAPI("http://127.0.0.1:8000/category/", "GET")
+        .then(result => {
+            // console.log(result.results)
+            showcategory(result.results);
+            $('.dropdown-toggle').dropdown()
         })
         .catch(error => console.log('error', error));
     </script>
