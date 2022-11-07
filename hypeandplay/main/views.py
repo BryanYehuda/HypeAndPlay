@@ -12,9 +12,28 @@ from drf_spectacular.utils import extend_schema
 
 
 class CategoryViewset(viewsets.ModelViewSet):
-    serializer_class = serializer.CategorySerializer
+    serializer_class = {"default" : serializer.CategorySerializer, "list" : serializer.CategoryList}
     queryset = models.Category.objects.all()
+    
+    def list(self, request, *args, **kwargs):
+        
+        child = self.get_child(0)
+        res = {'result' : child}
+        
+        return Response(res)
 
+    def  get_child(self, ids : int):
+        result = {}
+        q = models.Category.objects.filter(parent_category = ids).all()
+        res = []
+        if len(q) == 0:
+            return res
+        for i in q:
+            child = self.get_child(i.id)
+            result = {"category" : i.name_category, "child" : child}
+            res.append(result)
+        return res
+               
 
 class PromoViewset(viewsets.ModelViewSet):
     serializer_class = serializer.PromoSerializer
@@ -76,4 +95,18 @@ class ProductViewset(viewsets.ModelViewSet):
     
     def get_serializer_class(self):
         return self.serializer_class.get(self.action, self.serializer_class["default"])
+    
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
 
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
+class AdBannerViewset(viewsets.ModelViewSet):
+    queryset = models.AdBanner.objects.all()
+    serializer_class = serializer.AdBannerSerializer
