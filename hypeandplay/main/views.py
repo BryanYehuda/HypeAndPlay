@@ -30,7 +30,7 @@ class CategoryViewset(viewsets.ModelViewSet):
             return res
         for i in q:
             child = self.get_child(i.id)
-            result = {"category" : i.name_category, "child" : child}
+            result = {"category" : i.name_category, "child" : child, "id" : i.id}
             res.append(result)
         return res
                
