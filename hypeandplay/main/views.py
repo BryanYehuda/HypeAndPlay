@@ -104,8 +104,7 @@ class ProductViewset(viewsets.ModelViewSet):
             serializer = self.get_serializer(page, many=True)
             res = []
             for item in serializer.data:
-                images = models.Image.objects.filter(product_id = item['id']).all()
-                item['images'] = [image.image.url for image in images]
+                item['images'] = self.get_url_image(item['id'])
                 res.append(item)
             return self.get_paginated_response(res)
 
@@ -117,12 +116,16 @@ class ProductViewset(viewsets.ModelViewSet):
         ids = self.kwargs['pk']
         data = serializer.ProductSerializer(self.get_object())
         
-        images = models.Image.objects.filter(product_id = ids).all()
-        images = [i.image.url for i in images]
+        images = self.get_url_image(ids)
         
         res = {**data.data,"images" : images}
         
         return Response(res)
+    
+    def get_url_image(self, ids : str):
+        images = models.Image.objects.filter(product_id = ids).all()
+        res = [image.image.url for image in images]
+        return res
     
 class AdBannerViewset(viewsets.ModelViewSet):
     queryset = models.AdBanner.objects.all()
