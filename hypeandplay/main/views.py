@@ -106,13 +106,23 @@ class ProductViewset(viewsets.ModelViewSet):
             for item in serializer.data:
                 images = models.Image.objects.filter(product_id = item['id']).all()
                 item['images'] = [image.image.url for image in images]
-                print(item['images'])
                 res.append(item)
             return self.get_paginated_response(res)
 
         serializer = self.get_serializer(queryset, many=True)
         
         return Response(serializer.data)
+
+    def retrieve(self, request, *args, **kwargs):
+        ids = self.kwargs['pk']
+        data = serializer.ProductSerializer(self.get_object())
+        
+        images = models.Image.objects.filter(product_id = ids).all()
+        images = [i.image.url for i in images]
+        
+        res = {**data.data,"images" : images}
+        
+        return Response(res)
     
 class AdBannerViewset(viewsets.ModelViewSet):
     queryset = models.AdBanner.objects.all()
