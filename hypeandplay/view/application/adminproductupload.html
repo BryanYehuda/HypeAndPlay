@@ -205,6 +205,8 @@
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
     <!-- Script Ends -->
     <script>
+        const server = "http://127.0.0.1:8000";
+
         const status = response => {
             if (response.status !== 200) {
                 console.log("Error : " + response.status);
@@ -263,21 +265,21 @@
         const showPromo = (result) => {
             let allPromo = ``;
             result.forEach((data) => {
-                console.log(data);
+                // console.log(data);
                 allPromo+=`<option value="${data.id}">${data.promo_name}</option>`
             })
             document.querySelector("#promo").innerHTML = allPromo;
 
         }
 
-        fetchAPI("http://127.0.0.1:8000/category/", "GET")
+        fetchAPI(`${server}/category/`, "GET")
         .then(result => {
             // console.log(result)
             processCategory(result.result);
             // $('.dropdown-toggle').dropdown()
         })
 
-        fetchAPI("http://127.0.0.1:8000/promo/", "GET")
+        fetchAPI(`${server}/promo/`, "GET")
         .then(result => {
             // console.log(result)
             showPromo(result.results);
