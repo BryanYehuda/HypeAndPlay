@@ -50,3 +50,11 @@ class Image(models.Model):
 
     def __str__(self):
         return f"{self.id}-{self.image}"
+    
+class AdBanner(models.Model):
+    name = models.CharField(max_length = 100)
+    image = models.ImageField(upload_to=get_image_url)
+    desc = models.TextField()
+    
+    def __str__(self):
+        return f"{self.name}"

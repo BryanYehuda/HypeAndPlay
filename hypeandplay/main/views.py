@@ -12,7 +12,7 @@ from drf_spectacular.utils import extend_schema
 
 
 class CategoryViewset(viewsets.ModelViewSet):
-    serializer_class = {"default" : serializer.CategorySerializer, "list" : serializer.CategoryList}
+    serializer_class = serializer.CategorySerializer
     queryset = models.Category.objects.all()
     
     def list(self, request, *args, **kwargs):
