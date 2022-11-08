@@ -7,7 +7,8 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Category
         fields = "__all__"
-        
+    
+    
 class PromoSerializer(serializers.ModelSerializer):
     
     class Meta:
@@ -27,3 +28,8 @@ class ProductImageSerializer(serializers.Serializer):
         required=False
     )
     product = ProductSerializer()
+    
+class AdBannerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.AdBanner
+        fields = "__all__"
