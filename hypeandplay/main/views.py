@@ -5,6 +5,7 @@ from . import models
 from . import serializer
 from rest_framework.response import Response
 from .filters import ProductFilter
+from django.db.models.query import QuerySet
 
 from drf_spectacular.utils import extend_schema
 
@@ -43,7 +44,7 @@ class PromoViewset(viewsets.ModelViewSet):
 class ProductViewset(viewsets.ModelViewSet):
     serializer_class = {
         "create": serializer.ProductImageSerializer,
-        "default": serializer.ProductSerializer,
+        "default": serializer.ProductSerializer
     }
 
     queryset = models.Product.objects.all()
@@ -98,15 +99,21 @@ class ProductViewset(viewsets.ModelViewSet):
     
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
-        
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
-            return self.get_paginated_response(serializer.data)
+            res = []
+            for item in serializer.data:
+                images = models.Image.objects.filter(product_id = item['id']).all()
+                item['images'] = [image.image.url for image in images]
+                print(item['images'])
+                res.append(item)
+            return self.get_paginated_response(res)
 
         serializer = self.get_serializer(queryset, many=True)
+        
         return Response(serializer.data)
-
+    
 class AdBannerViewset(viewsets.ModelViewSet):
     queryset = models.AdBanner.objects.all()
     serializer_class = serializer.AdBannerSerializer

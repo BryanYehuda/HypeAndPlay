@@ -17,6 +17,7 @@ class PromoSerializer(serializers.ModelSerializer):
         
         
 class ProductSerializer(serializers.ModelSerializer):
+    images = serializers.RelatedField(many=True, read_only=True)
     class Meta:
         model = models.Product
         fields = "__all__"
@@ -33,3 +34,4 @@ class AdBannerSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.AdBanner
         fields = "__all__"
+    
