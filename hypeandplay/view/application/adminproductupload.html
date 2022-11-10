@@ -1,151 +1,320 @@
 <!DOCTYPE html>
 <html lang="id">
-
-<head>
+  <head>
     <!-- Meta Starts -->
     <title>Hype and Play - Admin Detail</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Hype And Play adalah Toko Hobby yang berbasis di Surabaya">
-    <meta name="author" content="Jupiter Development">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Hype And Play adalah Toko Hobby yang berbasis di Surabaya"
+    />
+    <meta name="author" content="Jupiter Development" />
     <meta name="theme-color" content="#10122b" />
     <!-- Meta Ends -->
 
     <!-- Link Starts -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
-    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/admin.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" as="font">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/admin.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
+      as="font"
+    />
     <!-- Link Ends -->
 
     <!-- Icon Starts -->
-    <link rel="apple-touch-icon" sizes="57x57" href="../img/icon/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="../img/icon/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="../img/icon/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="../img/icon/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="../img/icon/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="../img/icon/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="../img/icon/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="../img/icon/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="../img/icon/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="36x36" href="../img/icon/android-icon-36x36.png">
-    <link rel="icon" type="image/png" sizes="48x48" href="../img/icon/android-icon-48x48.png">
-    <link rel="icon" type="image/png" sizes="72x72" href="../img/icon/android-icon-72x72.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="../img/icon/android-icon-96x96.png">
-    <link rel="icon" type="image/png" sizes="144x144" href="../img/icon/android-icon-144x144.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="../img/icon/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../img/icon/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../img/icon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="../img/icon/favicon-96x96.png">
+    <link
+      rel="apple-touch-icon"
+      sizes="57x57"
+      href="../img/icon/apple-icon-57x57.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="60x60"
+      href="../img/icon/apple-icon-60x60.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="../img/icon/apple-icon-72x72.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="../img/icon/apple-icon-76x76.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="../img/icon/apple-icon-114x114.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="../img/icon/apple-icon-120x120.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="../img/icon/apple-icon-144x144.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="../img/icon/apple-icon-152x152.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../img/icon/apple-icon-180x180.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="36x36"
+      href="../img/icon/android-icon-36x36.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="48x48"
+      href="../img/icon/android-icon-48x48.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="72x72"
+      href="../img/icon/android-icon-72x72.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="../img/icon/android-icon-96x96.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="144x144"
+      href="../img/icon/android-icon-144x144.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="../img/icon/android-icon-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../img/icon/favicon-16x16.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../img/icon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="../img/icon/favicon-96x96.png"
+    />
     <!-- Icon Ends -->
-</head>
+  </head>
 
-<body>
-
+  <body>
     <div class="wrapper">
-        <!-- Slider Profile Admin Starts -->
+      <!-- Slider Profile Admin Starts -->
 
-        <div class="slider d-none d-lg-block" id="sliders">
-            <!--Profile staff Starts-->
-            <div class="slider-head">
-                <div class="text-center layzload">
-                    <img src="../img/admin/logoadminhitam.png" alt="Logo Admin" class="logoadmin mt-5">
-                </div>
-                <div class="d-block pt-4 pb-3 px-3  text-center">
-                    <img src="../img/admin/adminpic.png " alt="User" class="slider-img-user rounded mx-auto d-block d-flex flex-wrap layzload">
-                    <h5 class="font-weight-bold mb-0 1h-1m text-white" style="text-align: center; margin-top: 5px; font-family: excluded; font-size: 15px;">
-                        Staff PIC
-                    </h5>
-                    <p class="staff text-white" style="text-align:center;">Staff</p>
-                    <button class="btn btn-danger">Logout</button>
-                </div>
-            </div>
-            <!--Profile staff Ends-->
-
-            <!--Sidebar Starts-->
-            <div class="slider-body">
-                <div class="navkiri">
-                    <a href="adminproduct.html"><button type="button" class="btn btn-outline-light horn font-weight-bold text-center w-75"> <i class="fa-solid fa-bullhorn"></i> Product </button></a>
-                    <a href="#"><button type="button" class="btn btn-outline-light horn font-weight-bold text-center w-75"> <i class="fa-solid fa-bullhorn"></i> Promo </button></a>
-                    <a href="adminevent.html"><button type="button" class="btn btn-outline-light horn font-weight-bold text-center w-75"> <i class="fa-solid fa-bullhorn"></i> Event </button></a>
-                    <a href="adminbanner.html"><button type="button" class="btn btn-outline-light horn font-weight-bold text-center w-75"> <i class="fa-solid fa-bullhorn"></i> Banner </button></a>
-                </div>
-            </div>
-            <!--Sidebar Ends-->
+      <div class="slider d-none d-lg-block" id="sliders">
+        <!--Profile staff Starts-->
+        <div class="slider-head">
+          <div class="text-center layzload">
+            <img
+              src="../img/admin/logoadminhitam.png"
+              alt="Logo Admin"
+              class="logoadmin mt-5"
+            />
+          </div>
+          <div class="d-block pt-4 pb-3 px-3 text-center">
+            <img
+              src="../img/admin/adminpic.png "
+              alt="User"
+              class="slider-img-user rounded mx-auto d-block d-flex flex-wrap layzload"
+            />
+            <h5
+              class="font-weight-bold mb-0 1h-1m text-white"
+              style="
+                text-align: center;
+                margin-top: 5px;
+                font-family: excluded;
+                font-size: 15px;
+              "
+            >
+              Staff PIC
+            </h5>
+            <p class="staff text-white" style="text-align: center">Staff</p>
+            <button class="btn btn-danger">Logout</button>
+          </div>
         </div>
+        <!--Profile staff Ends-->
 
-        <!-- Main Admin Area Starts -->
-        <div class="main-pages">
-            <div class="container-fluid ">
+        <!--Sidebar Starts-->
+        <div class="slider-body">
+          <div class="navkiri">
+            <a href="adminproduct.html"
+              ><button
+                type="button"
+                class="btn btn-outline-light horn font-weight-bold text-center w-75"
+              >
+                <i class="fa-solid fa-bullhorn"></i> Product
+              </button></a
+            >
+            <a href="adminPromo.html"
+              ><button
+                type="button"
+                class="btn btn-outline-light horn font-weight-bold text-center w-75"
+              >
+                <i class="fa-solid fa-bullhorn"></i> Promo
+              </button></a
+            >
+            <a href="adminevent.html"
+              ><button
+                type="button"
+                class="btn btn-outline-light horn font-weight-bold text-center w-75"
+              >
+                <i class="fa-solid fa-bullhorn"></i> Event
+              </button></a
+            >
+            <a href="adminbanner.html"
+              ><button
+                type="button"
+                class="btn btn-outline-light horn font-weight-bold text-center w-75"
+              >
+                <i class="fa-solid fa-bullhorn"></i> Banner
+              </button></a
+            >
+          </div>
+        </div>
+        <!--Sidebar Ends-->
+      </div>
 
-                <!-- Table Title Starts -->
-                <div class="row">
-                    <div class="col-12">
-                        <h2 class="text-title">Insert Product</h2>
-                    </div>
-                </div>
-                <!-- Table Title Ends -->
+      <!-- Main Admin Area Starts -->
+      <div class="main-pages">
+        <div class="container-fluid">
+          <!-- Table Title Starts -->
+          <div class="row">
+            <div class="col-12">
+              <h2 class="text-title">Insert Product</h2>
+            </div>
+          </div>
+          <!-- Table Title Ends -->
 
-                <!-- Table Form Starts -->
-                <form action="http://127.0.0.1:8000/product/" target="_blank" method="post" enctype="multipart/form-data">
-                    <div class="row">
-                        <div class="col-3">
-                            <p class="product-insert-title">Product Name</p>
-                        </div>
-                        <div class="col-md-8 col-9">
-                            <input class="form-control" name="name" type="text" placeholder="Product Name">
-                        </div>
-                    </div><br>
-                    <div class="row">
-                        <div class="col-3">
-                            <p class="product-insert-title">Category Name</p>
-                        </div><br>
-                        <div class="col-8">
-                            <div class="dropdown dropdown-table">
-                                <!-- <button class="btn btn-outline-light dropdown-toggle float-left" type="button" id="type" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <!-- Table Form Starts -->
+          <form
+            action="http://127.0.0.1:8000/product/"
+            target="_blank"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <div class="row">
+              <div class="col-3">
+                <p class="product-insert-title">Product Name</p>
+              </div>
+              <div class="col-md-8 col-9">
+                <input
+                  class="form-control"
+                  name="name"
+                  type="text"
+                  placeholder="Product Name"
+                />
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <div class="col-3">
+                <p class="product-insert-title">Category Name</p>
+              </div>
+              <br />
+              <div class="col-8">
+                <div class="dropdown dropdown-table">
+                  <!-- <button class="btn btn-outline-light dropdown-toggle float-left" type="button" id="type" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                   Choose Category
                                 </button> -->
-                                <select class="btn btn-outline-light dropdown-toggle text-left" name="category" id="category">
-                                    <!-- <option value="1">Category 1</option>
+                  <select
+                    class="btn btn-outline-light dropdown-toggle text-left"
+                    name="category"
+                    id="category"
+                  >
+                    <!-- <option value="1">Category 1</option>
                                     <option value="2">Category 4</option>
                                     <option value="3">Category 3</option>
                                     <option value="4">Category 2</option> -->
-                                </select>
-                            </div>
-                        </div>
-                    </div><br>
-                    <div class="row">
-                        <div class="col-3">
-                            <p class="product-insert-title">Upload Photo</p>
-                        </div>
-                        <div class="col-md-8 col-9">
-
-                            <input class="btn btn-outline-light" type="file" name="images" id="file">
-                        </div>
-                    </div><br>
-                    <div class="row">
-                        <div class="col-3">
-                            <p class="product-insert-title">Choose Promo</p>
-                        </div><br>
-                        <div class="col-8">
-                            <div class="dropdown dropdown-table">
-                                <!-- <button class="btn btn-outline-light dropdown-toggle float-left" type="button" id="type" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  </select>
+                </div>
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <div class="col-3">
+                <p class="product-insert-title">Upload Photo</p>
+              </div>
+              <div class="col-md-8 col-9">
+                <input
+                  class="btn btn-outline-light"
+                  type="file"
+                  name="images"
+                  id="file"
+                />
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <div class="col-3">
+                <p class="product-insert-title">Choose Promo</p>
+              </div>
+              <br />
+              <div class="col-8">
+                <div class="dropdown dropdown-table">
+                  <!-- <button class="btn btn-outline-light dropdown-toggle float-left" type="button" id="type" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                   Choose Category
                                 </button> -->
-                                <select class="btn btn-outline-light dropdown-toggle" name="promo" id="promo" style="text-align: left !important;">
-                                    <!-- <option value="1">No Promo</option>
+                  <select
+                    class="btn btn-outline-light dropdown-toggle"
+                    name="promo"
+                    id="promo"
+                    style="text-align: left !important"
+                  >
+                    <!-- <option value="1">No Promo</option>
                                     <option value="2">Promo 1</option>
                                     <option value="3">Promo 2</option>
                                     <option value="4">Promo 3</option> -->
-                                </select>
-                            </div>
-                        </div>
-                    </div><br>
-                    <!-- <div class="row">
+                  </select>
+                </div>
+              </div>
+            </div>
+            <br />
+            <!-- <div class="row">
                         <div class="col-3">
                             <p class="product-insert-title">Mark As New Release?</p>
                         </div>
@@ -155,139 +324,173 @@
                             </td>
                         </div>
                     </div><br> -->
-                    <div class="row">
-                        <div class="col-3">
-                            <p class="product-insert-title">Description</p>
-                        </div>
-                        <div class="col-md-8 col-9">
-                            <textarea class="form-control" id="exampleFormControlTextarea1" name="description" rows="10" placeholder="Product Description"></textarea>
-                        </div>
-                    </div><br>
-                    <div class="row">
-                        <div class="col-3">
-                            <p class="product-insert-title">Product Price</p>
-                        </div>
-                        <div class="col-md-8 col-9">
-                            <input class="form-control" name="price" type="text" placeholder="Product Price">
-                        </div>
-                    </div><br>
-                    <div class="row">
-                        <div class="col-3">
-                            <p class="product-insert-title">Product Stock</p>
-                        </div>
-                        <div class="col-md-8 col-9">
-                            <input class="form-control" name="stock" type="text" placeholder="Product Stock">
-                        </div>
-                    </div><br>
-                    <input class="form-control" name="new_release" value="true" type="hidden">
-                    <input class="form-control" name="status" value="true" type="hidden">
-                    <!-- <input class="form-control" name="promo" value="1" type="hidden"> -->
-                    <div class="row">
-                        <div class="offset-3 offset-lg-3 offset-md-3 offset-sm-3 col-lg-2 col-md-3 col-sm-4 col-4">
-                            <input type="submit" value="Submit" class="btn btn-block btn-success">
-                        </div>
-                    </div>
-                </form>
+            <div class="row">
+              <div class="col-3">
+                <p class="product-insert-title">Description</p>
+              </div>
+              <div class="col-md-8 col-9">
+                <textarea
+                  class="form-control"
+                  id="exampleFormControlTextarea1"
+                  name="description"
+                  rows="10"
+                  placeholder="Product Description"
+                ></textarea>
+              </div>
             </div>
-
-
+            <br />
+            <div class="row">
+              <div class="col-3">
+                <p class="product-insert-title">Product Price</p>
+              </div>
+              <div class="col-md-8 col-9">
+                <input
+                  class="form-control"
+                  name="price"
+                  type="text"
+                  placeholder="Product Price"
+                />
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <div class="col-3">
+                <p class="product-insert-title">Product Stock</p>
+              </div>
+              <div class="col-md-8 col-9">
+                <input
+                  class="form-control"
+                  name="stock"
+                  type="text"
+                  placeholder="Product Stock"
+                />
+              </div>
+            </div>
+            <br />
+            <input
+              class="form-control"
+              name="new_release"
+              value="true"
+              type="hidden"
+            />
+            <input
+              class="form-control"
+              name="status"
+              value="true"
+              type="hidden"
+            />
+            <!-- <input class="form-control" name="promo" value="1" type="hidden"> -->
+            <div class="row">
+              <div
+                class="offset-3 offset-lg-3 offset-md-3 offset-sm-3 col-lg-2 col-md-3 col-sm-4 col-4"
+              >
+                <input
+                  type="submit"
+                  value="Submit"
+                  class="btn btn-block btn-success"
+                />
+              </div>
+            </div>
+          </form>
         </div>
+      </div>
     </div>
     <!-- Main Admin Area Ends -->
 
-    </div>
-    <!-- Slider Profile Admin Ends -->
-
     <!-- Script Starts -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+      integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
+      integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
     <!-- Script Ends -->
     <script>
-        const server = "http://127.0.0.1:8000";
+      const server = "http://127.0.0.1:8000";
 
-        const status = response => {
-            if (response.status !== 200) {
-                console.log("Error : " + response.status);
-                return Promise.reject(new Error(response.statusText));
-            } else {
-                return Promise.resolve(response);
-            }
+      const status = (response) => {
+        if (response.status !== 200) {
+          console.log("Error : " + response.status);
+          return Promise.reject(new Error(response.statusText));
+        } else {
+          return Promise.resolve(response);
         }
+      };
 
-        const json = response => {
-            return response.json();
-        }
+      const json = (response) => {
+        return response.json();
+      };
 
-        const error = error => {
-            console.log("Error" + error);
-        }
+      const error = (error) => {
+        console.log("Error" + error);
+      };
 
-        const fetchAPI = (url, method) => {
-            var requestOptions = {
-                method: method,
-                redirect: 'follow'
-            };
+      const fetchAPI = (url, method) => {
+        var requestOptions = {
+          method: method,
+          redirect: "follow",
+        };
 
-            return fetch(url)
-                .then(status)
-                .then(json)
-                .catch(error)
-        }
+        return fetch(url).then(status).then(json).catch(error);
+      };
 
-        let allCategory = ``;
+      let allCategory = ``;
 
-        const processChild = (result) => {
-            result.forEach((data) => {
-                if(data.child.length == 0){
-                    allCategory+=`<option value="${data.id}">${data.category}</option>`
-                    // console.log(allCategory)
-                }else if(data.child.length != 0){
-                    processChild(data.child);
-                }
-            });
-        }
-
-        const processCategory = (result) => {
-            result.forEach((data) => {
-                if(data.child.length == 0){
-                    allCategory+=`<option value="${data.id}">${data.category}</option>`
-                }else if(data.child.length != 0){
-                    processChild(data.child);
-                }
-            });
-
+      const processChild = (result) => {
+        result.forEach((data) => {
+          if (data.child.length == 0) {
+            allCategory += `<option value="${data.id}">${data.category}</option>`;
             // console.log(allCategory)
-            document.querySelector("#category").innerHTML = allCategory;
-        }
+          } else if (data.child.length != 0) {
+            processChild(data.child);
+          }
+        });
+      };
 
-        const showPromo = (result) => {
-            let allPromo = ``;
-            result.forEach((data) => {
-                // console.log(data);
-                allPromo+=`<option value="${data.id}">${data.promo_name}</option>`
-            })
-            document.querySelector("#promo").innerHTML = allPromo;
+      const processCategory = (result) => {
+        result.forEach((data) => {
+          if (data.child.length == 0) {
+            allCategory += `<option value="${data.id}">${data.category}</option>`;
+          } else if (data.child.length != 0) {
+            processChild(data.child);
+          }
+        });
 
-        }
+        // console.log(allCategory)
+        document.querySelector("#category").innerHTML = allCategory;
+      };
 
-        fetchAPI(`${server}/category/`, "GET")
-        .then(result => {
-            // console.log(result)
-            processCategory(result.result);
-            // $('.dropdown-toggle').dropdown()
-        })
+      const showPromo = (result) => {
+        let allPromo = ``;
+        result.forEach((data) => {
+          // console.log(data);
+          allPromo += `<option value="${data.id}">${data.promo_name}</option>`;
+        });
+        document.querySelector("#promo").innerHTML = allPromo;
+      };
 
-        fetchAPI(`${server}/promo/`, "GET")
-        .then(result => {
-            // console.log(result)
-            showPromo(result.results);
-            // processCategory(result.result);
-            // $('.dropdown-toggle').dropdown()
-        })
+      fetchAPI(`${server}/category/`, "GET").then((result) => {
+        // console.log(result)
+        processCategory(result.result);
+        // $('.dropdown-toggle').dropdown()
+      });
+
+      fetchAPI(`${server}/promo/`, "GET").then((result) => {
+        // console.log(result)
+        showPromo(result.results);
+        // processCategory(result.result);
+        // $('.dropdown-toggle').dropdown()
+      });
     </script>
-
-</body>
-
+  </body>
 </html>

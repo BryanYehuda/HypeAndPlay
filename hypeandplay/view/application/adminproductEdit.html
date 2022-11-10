@@ -190,7 +190,7 @@
                 <i class="fa-solid fa-bullhorn"></i> Product
               </button></a
             >
-            <a href="#"
+            <a href="adminPromo.html"
               ><button
                 type="button"
                 class="btn btn-outline-light horn font-weight-bold text-center w-75"
@@ -511,7 +511,6 @@
       };
 
       fetchAPI(`${server}/product/${id}`, "GET").then((result) => {
-        console.log(result);
         document
           .querySelector(`.promo_${result.promo[0]}`)
           .setAttribute("selected", "selected");

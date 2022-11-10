@@ -225,7 +225,7 @@
           <!-- Table Title Starts -->
           <div class="row">
             <div class="col-12">
-              <h2 class="text-title">Insert Event</h2>
+              <h2 class="text-title">Insert Banner</h2>
             </div>
           </div>
           <!-- Table Title Ends -->
@@ -234,23 +234,15 @@
           <div class="table-form">
             <div class="row">
               <div class="col-3">
-                <p class="product-insert-title">Event Name</p>
+                <p class="product-insert-title">Promo Name</p>
               </div>
               <div class="col-md-8 col-9">
                 <input
-                  class="form-control"
+                  class="form-control promoName"
                   type="text"
-                  placeholder="Event Name"
+                  name="promo_name"
+                  placeholder="Promo Name"
                 />
-              </div>
-            </div>
-            <br />
-            <div class="row">
-              <div class="col-3">
-                <p class="product-insert-title">Upload Photo</p>
-              </div>
-              <div class="col-md-8 col-9">
-                <button class="btn btn-outline-light">Upload Photo</button>
               </div>
             </div>
             <br />
@@ -259,12 +251,12 @@
                 <p class="product-insert-title">Description</p>
               </div>
               <div class="col-md-8 col-9">
-                <textarea
-                  class="form-control"
-                  id="exampleFormControlTextarea1"
-                  rows="10"
-                  placeholder="Event Description"
-                ></textarea>
+                <input
+                  class="form-control description"
+                  type="text"
+                  name="promo_desc"
+                  placeholder="Promo description"
+                />
               </div>
             </div>
             <br />
@@ -272,10 +264,11 @@
               <div
                 class="offset-3 offset-lg-3 offset-md-3 offset-sm-3 col-lg-2 col-md-3 col-sm-4 col-4"
               >
-                <button class="btn btn-block btn-success">Submit</button>
-              </div>
-              <div class="col-lg-2 col-md-3 col-sm-4 col-4">
-                <button class="btn btn-block btn-danger">Cancel</button>
+                <input
+                  class="btn btn-block btn-success submitForm"
+                  type="submit"
+                  value="Submit"
+                />
               </div>
             </div>
           </div>
@@ -283,6 +276,7 @@
       </div>
     </div>
     <!-- Main Admin Area Ends -->
+    <!-- Slider Profile Admin Ends -->
 
     <!-- Script Starts -->
     <script
@@ -302,5 +296,72 @@
     ></script>
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
     <!-- Script Ends -->
+    <script>
+      const server = "http://127.0.0.1:8000";
+
+      const status = (response) => {
+        if (response.status !== 200) {
+          console.log("Error : " + response.status);
+          return Promise.reject(new Error(response.statusText));
+        } else {
+          return Promise.resolve(response);
+        }
+      };
+
+      const json = (response) => {
+        return response.json();
+      };
+
+      const error = (error) => {
+        console.log("Error" + error);
+      };
+
+      const fetchAPI = (url, method) => {
+        var requestOptions = {
+          method: method,
+          redirect: "follow",
+        };
+
+        return fetch(url).then(status).then(json).catch(error);
+      };
+
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const id = urlParams.get("id");
+
+      const promoName = document.querySelector(".promoName");
+      const promoDescription = document.querySelector(".description");
+
+      document.querySelector(".submitForm").addEventListener("click", () => {
+        updateData();
+      });
+
+      fetchAPI(`${server}/promo/${id}`, "GET").then((result) => {
+        promoName.value = result.promo_name;
+        promoDescription.value = result.promo_desc;
+      });
+
+      const updateData = () => {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+          promo_name: promoName.value,
+          promo_desc: promoDescription.value,
+        });
+
+        var requestOptions = {
+          method: "PATCH",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow",
+        };
+
+        fetch(`http://127.0.0.1:8000/promo/${id}/`, requestOptions)
+          .then((response) => response.text())
+          .then((result) => console.log(result))
+          .catch((error) => console.log("error", error));
+      };
+    </script>
   </body>
 </html>

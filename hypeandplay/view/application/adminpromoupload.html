@@ -225,64 +225,66 @@
           <!-- Table Title Starts -->
           <div class="row">
             <div class="col-12">
-              <h2 class="text-title">Insert Event</h2>
+              <h2 class="text-title">Insert Banner</h2>
             </div>
           </div>
           <!-- Table Title Ends -->
 
           <!-- Table Form Starts -->
-          <div class="table-form">
-            <div class="row">
-              <div class="col-3">
-                <p class="product-insert-title">Event Name</p>
+          <form
+            action="http://127.0.0.1:8000/promo/"
+            target="_blank"
+            method="post"
+            enctype="multipart/form-data"
+          >
+            <div class="table-form">
+              <div class="row">
+                <div class="col-3">
+                  <p class="product-insert-title">Promo Name</p>
+                </div>
+                <div class="col-md-8 col-9">
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="promo_name"
+                    placeholder="Promo Name"
+                  />
+                </div>
               </div>
-              <div class="col-md-8 col-9">
-                <input
-                  class="form-control"
-                  type="text"
-                  placeholder="Event Name"
-                />
+              <br />
+              <div class="row">
+                <div class="col-3">
+                  <p class="product-insert-title">Description</p>
+                </div>
+                <div class="col-md-8 col-9">
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="promo_desc"
+                    placeholder="Promo description"
+                  />
+                </div>
+              </div>
+              <br />
+              <div class="row">
+                <div
+                  class="offset-3 offset-lg-3 offset-md-3 offset-sm-3 col-lg-2 col-md-3 col-sm-4 col-4"
+                >
+                  <input type="hidden" name="desc" value="default" />
+                  <input
+                    class="btn btn-block btn-success"
+                    type="submit"
+                    value="Submit"
+                  />
+                </div>
               </div>
             </div>
-            <br />
-            <div class="row">
-              <div class="col-3">
-                <p class="product-insert-title">Upload Photo</p>
-              </div>
-              <div class="col-md-8 col-9">
-                <button class="btn btn-outline-light">Upload Photo</button>
-              </div>
-            </div>
-            <br />
-            <div class="row">
-              <div class="col-3">
-                <p class="product-insert-title">Description</p>
-              </div>
-              <div class="col-md-8 col-9">
-                <textarea
-                  class="form-control"
-                  id="exampleFormControlTextarea1"
-                  rows="10"
-                  placeholder="Event Description"
-                ></textarea>
-              </div>
-            </div>
-            <br />
-            <div class="row">
-              <div
-                class="offset-3 offset-lg-3 offset-md-3 offset-sm-3 col-lg-2 col-md-3 col-sm-4 col-4"
-              >
-                <button class="btn btn-block btn-success">Submit</button>
-              </div>
-              <div class="col-lg-2 col-md-3 col-sm-4 col-4">
-                <button class="btn btn-block btn-danger">Cancel</button>
-              </div>
-            </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
     <!-- Main Admin Area Ends -->
+    <!-- Slider Profile Admin Ends -->
 
     <!-- Script Starts -->
     <script
