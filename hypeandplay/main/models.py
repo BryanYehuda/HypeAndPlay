@@ -42,7 +42,12 @@ class Product(models.Model):
         return f"{self.name}"
 
 def get_image_url(instance, files):
-    return f"image/{instance.product_id.name}-{files}"
+    key = instance.__dict__.keys()
+    if "name" in key:
+        url = f"image/{instance.id}-{files}"
+    elif "product_id_id" in key:
+        url = f"image/{instance.product_id}-{files}"
+    return url
 
 class Image(models.Model):
     image = models.ImageField(upload_to=get_image_url)
@@ -56,5 +61,13 @@ class AdBanner(models.Model):
     image = models.ImageField(upload_to=get_image_url)
     desc = models.TextField()
     
+    def __str__(self):
+        return f"{self.name}"
+    
+class Event(models.Model):
+    name = models.CharField(max_length = 100)
+    image = models.ImageField(upload_to=get_image_url)
+    desc = models.TextField()
+
     def __str__(self):
         return f"{self.name}"

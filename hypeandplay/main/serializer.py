@@ -35,3 +35,7 @@ class AdBannerSerializer(serializers.ModelSerializer):
         model = models.AdBanner
         fields = "__all__"
     
+class EventSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Event
+        fields = "__all__"

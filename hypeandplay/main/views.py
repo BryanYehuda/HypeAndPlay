@@ -15,26 +15,26 @@ from drf_spectacular.utils import extend_schema
 class CategoryViewset(viewsets.ModelViewSet):
     serializer_class = serializer.CategorySerializer
     queryset = models.Category.objects.all()
-    
+
     def list(self, request, *args, **kwargs):
-        
+
         child = self.get_child(0)
-        res = {'result' : child}
-        
+        res = {"result": child}
+
         return Response(res)
 
-    def  get_child(self, ids : int):
+    def get_child(self, ids: int):
         result = {}
-        q = models.Category.objects.filter(parent_category = ids).all()
+        q = models.Category.objects.filter(parent_category=ids).all()
         res = []
         if len(q) == 0:
             return res
         for i in q:
             child = self.get_child(i.id)
-            result = {"category" : i.name_category, "child" : child, "id" : i.id}
+            result = {"category": i.name_category, "child": child, "id": i.id}
             res.append(result)
         return res
-               
+
 
 class PromoViewset(viewsets.ModelViewSet):
     serializer_class = serializer.PromoSerializer
@@ -44,59 +44,60 @@ class PromoViewset(viewsets.ModelViewSet):
 class ProductViewset(viewsets.ModelViewSet):
     serializer_class = {
         "create": serializer.ProductImageSerializer,
-        "default": serializer.ProductSerializer
+        "default": serializer.ProductSerializer,
     }
 
     queryset = models.Product.objects.all()
 
     filterset_class = ProductFilter
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ["category",'stock', 'price']
-    search_fields = ['name']
+    filter_backends = [
+        DjangoFilterBackend,
+        filters.SearchFilter,
+        filters.OrderingFilter,
+    ]
+    filterset_fields = ["category", "stock", "price"]
+    search_fields = ["name"]
     ordering_fields = ("price",)
-    
+
     def create(self, request, *args, **kwargs):
-        
-        images = request.data.pop('images', [])
-        
-        data = {
-            "images" : images,
-            "product" : request.data
-        }
-        
+
+        images = request.data.pop("images", [])
+
+        data = {"images": images, "product": request.data}
+
         serial = self.get_serializer(data=data)
         serial.is_valid(raise_exception=True)
-    
-        input_prod = {**serial.data['product']}
-        
-        cat = models.Category.objects.get(id=int(input_prod['category']))
-        input_prod['category'] = cat
-        
-        promos = input_prod.pop("promo") 
-        
+
+        input_prod = {**serial.data["product"]}
+
+        cat = models.Category.objects.get(id=int(input_prod["category"]))
+        input_prod["category"] = cat
+
+        promos = input_prod.pop("promo")
+
         product = models.Product.objects.create(**input_prod)
         product.save()
-        
+
         for promo in promos:
             prom = models.Promo.objects.get(id=int(promo))
             product.promo.add(prom)
-        
+
         product.save()
-        
+
         res_img = []
         for image in images:
-            img = models.Image.objects.create(image = image, product_id = product)
+            img = models.Image.objects.create(image=image, product_id=product)
             res_img.append(img.__str__())
             img.save()
-        
-        data['images'] = res_img
-        data['product']['id'] = product.id
-        
+
+        data["images"] = res_img
+        data["product"]["id"] = product.id
+
         return Response(data)
-    
+
     def get_serializer_class(self):
         return self.serializer_class.get(self.action, self.serializer_class["default"])
-    
+
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
         page = self.paginate_queryset(queryset)
@@ -104,29 +105,56 @@ class ProductViewset(viewsets.ModelViewSet):
             serializer = self.get_serializer(page, many=True)
             res = []
             for item in serializer.data:
-                item['images'] = self.get_url_image(item['id'])
+                item["images"] = self.get_url_image(item["id"])
                 res.append(item)
             return self.get_paginated_response(res)
 
         serializer = self.get_serializer(queryset, many=True)
-        
+
         return Response(serializer.data)
 
     def retrieve(self, request, *args, **kwargs):
-        ids = self.kwargs['pk']
+        ids = self.kwargs["pk"]
         data = serializer.ProductSerializer(self.get_object())
-        
+
         images = self.get_url_image(ids)
-        
-        res = {**data.data,"images" : images}
-        
+
+        res = {**data.data, "images": images}
+
         return Response(res)
-    
-    def get_url_image(self, ids : str):
-        images = models.Image.objects.filter(product_id = ids).all()
+
+    def get_url_image(self, ids: str):
+        images = models.Image.objects.filter(product_id=ids).all()
         res = [image.image.url for image in images]
         return res
-    
+
+    def update(self, request, *args, **kwargs):
+        obj = self.get_object()
+
+        models.Image.objects.filter(product_id=obj.id).delete()
+
+        partial = kwargs.pop("partial", False)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        
+        data = serializer.data
+        img = request.data.pop("images", [])
+        if img is not None:
+            for i in img:
+                img = models.Image.objects.create(image=i, product_id=obj)
+                img.save()
+            data["images"] = self.get_url_image(obj.id)
+
+        return Response(data)
+
+
 class AdBannerViewset(viewsets.ModelViewSet):
     queryset = models.AdBanner.objects.all()
     serializer_class = serializer.AdBannerSerializer
+
+
+class EventViewset(viewsets.ModelViewSet):
+    queryset = models.Event.objects.all()
+    serializer_class = serializer.EventSerializer
