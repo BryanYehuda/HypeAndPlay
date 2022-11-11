@@ -483,12 +483,9 @@
         if (inputUser === "") {
           return alert("Masukkan judul yang dicari");
         } else {
-          fetchAPI(`http://127.0.0.1:8000/product/?search=${inputUser}`, "GET")
-            .then((result) => {
-              console.log(result.results);
-              showDataProduct(result.results);
-            })
-            .catch((error) => console.log("error", error));
+          getProduct(
+            `${server}/product/?search=${inputUser}&limit=${limit}&offset=0`
+          );
         }
       };
 
@@ -496,13 +493,13 @@
         let product = ``;
         const statusProduct = data.status == true ? "checked" : "";
         product += `
-                <div class="col-6 col-md-3">
+                <div class="col-6 col-md-3 mt-4">
                 <a href="productdetail.html?id=${data.id}" class="product-link">
                     <div class="card">
                     <img
                         height="200"
                         class="card-img-top"
-                        src="${data.images[0]}"
+                        src="${data.images}"
                         alt="Product Image"
                     />
                     <div class="card-body">
