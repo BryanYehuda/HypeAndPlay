@@ -2,7 +2,7 @@
 <html lang="id">
   <head>
     <!-- Meta Starts -->
-    <title>Hype and Play - Admin</title>
+    <title>Hype and Play - Admin Detail</title>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -232,101 +232,80 @@
         <div class="container-fluid">
           <!-- Table Title Starts -->
           <div class="row">
-            <div class="col-5">
-              <h2 class="text-title">Event List</h2>
-            </div>
-            <div class="col-7">
-              <a href="admineventupload.html"
-                ><button type="button" class="btn btn-success float-right">
-                  Add Event<i
-                    class="bi bi-plus"
-                    style="margin-left: 5px"
-                  ></i></button
-              ></a>
-              <div class="dropdown dropdown-table">
-                <button
-                  class="btn btn-primary dropdown-toggle float-right d-lg-none"
-                  style="margin-right: 5px"
-                  type="button"
-                  id="type"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  Menu
-                </button>
-                <div
-                  class="dropdown-menu dropdown-menu-right"
-                  aria-labelledby="type"
-                >
-                  <a class="dropdown-item" href="#">Product</a>
-                  <a class="dropdown-item" href="#">Promo</a>
-                  <a class="dropdown-item" href="#">Event</a>
-                  <a class="dropdown-item" href="#">Banner</a>
-                  <a class="dropdown-item" href="#">Logout</a>
-                </div>
-              </div>
+            <div class="col-12">
+              <h2 class="text-title">Insert Event</h2>
             </div>
           </div>
           <!-- Table Title Ends -->
 
-          <!-- Table Search Starts -->
-          <div class="row float-right table-search">
-            <form class="form-inline">
-              <input
-                class="form-control mr-sm-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button
-                class="btn btn-outline-light my-2 my-sm-0 btn-navbar d-none d-sm-block"
-                type="submit"
+          <!-- Table Form Starts -->
+          <div class="table-form">
+            <div class="row">
+              <div class="col-3">
+                <p class="product-insert-title">Event Name</p>
+              </div>
+              <div class="col-md-8 col-9">
+                <input
+                  class="form-control name"
+                  type="text"
+                  name="name"
+                  placeholder="Event Name"
+                />
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <div class="col-3">
+                <p class="product-insert-title">Current Photo</p>
+              </div>
+              <div class="col-md-8 col-9 eventImage"></div>
+            </div>
+            <br />
+            <div class="row">
+              <div class="col-3">
+                <p class="product-insert-title">Upload Photo</p>
+              </div>
+              <div class="col-md-8 col-9">
+                <button class="btn btn-outline-light">
+                  <input
+                    type="file"
+                    name="image"
+                    id="image"
+                    class="image"
+                  />Upload Photo
+                </button>
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <div class="col-3">
+                <p class="product-insert-title">Description</p>
+              </div>
+              <div class="col-md-8 col-9">
+                <textarea
+                  class="form-control desc"
+                  id="exampleFormControlTextarea1"
+                  rows="10"
+                  name="desc"
+                  placeholder="Event Description"
+                ></textarea>
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <div
+                class="offset-3 offset-lg-3 offset-md-3 offset-sm-3 col-lg-2 col-md-3 col-sm-4 col-4"
               >
-                <i class="bi bi-search"></i>
-              </button>
-            </form>
+                <button class="btn btn-block btn-success submitForm">
+                  Submit
+                </button>
+              </div>
+            </div>
           </div>
-          <!-- Table Search Ends -->
-
-          <!-- Table Data Starts-->
-          <div class="table-responsive">
-            <table
-              id="tablemain"
-              class="table table-hover text-wrap table-sm"
-              cellspacing="0"
-            >
-              <thead>
-                <tr>
-                  <th scope="col">Image</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-              <tbody class="productListItem"></tbody>
-            </table>
-          </div>
-          <!-- Table Data Ends -->
-
-          <!-- Next Table Starts-->
-          <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-end">
-              <li class="page-item previous" style="cursor: pointer">
-                <a class="page-link">Previous</a>
-              </li>
-              <div class="dataOther d-flex"></div>
-
-              <li class="page-item next" style="cursor: pointer">
-                <a class="page-link">Next</a>
-              </li>
-            </ul>
-          </nav>
-          <!-- Next Table Ends-->
         </div>
       </div>
-      <!-- Main Admin Area Ends -->
     </div>
-    <!-- Slider Profile Admin Ends -->
+    <!-- Main Admin Area Ends -->
 
     <!-- Script Starts -->
     <script
@@ -375,93 +354,50 @@
         return fetch(url).then(status).then(json).catch(error);
       };
 
-      const showProduct = (data) => {
-        let product = ``;
-        product += `
-                    <tr>
-                        <td class="align-middle"><img src=${data.image} width="100"></td>
-                        <td class="align-middle">${data.name}</td>
-                        <td class="align-middle">
-                            <a href="admineventEdit.html?id=${data.id}" style="color:white"><i class="bi bi-pencil ml-1" style="cursor:pointer"></i></a>
-                            <a><i class="bi bi-trash" style="cursor:pointer" onclick="deleteProduct('${data.id}')"></i></a>
-                        </td>
-                    </tr>
-                `;
-        return product;
-      };
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const id = urlParams.get("id");
 
-      const processProduct = (result) => {
-        let allProduct = ``;
-        result.forEach((data) => {
-          allProduct += showProduct(data);
-        });
-        document.querySelector(".productListItem").innerHTML = allProduct;
-      };
+      const name_event = document.querySelector(".name");
+      const imageFile_event = document.querySelector(".image");
+      const desc_event = document.querySelector(".desc");
+      const image_event = document.querySelector(".eventImage");
 
-      const getProduct = (link) => {
-        fetchAPI(link, "GET")
-          .then((result) => {
-            processProduct(result.results);
-            setPagination(result);
-          })
-          .catch((error) => console.log("error", error));
-      };
+      document.querySelector(".submitForm").addEventListener("click", () => {
+        updateData();
+      });
 
-      let nextButton = document.querySelector(".next");
-      let prevButton = document.querySelector(".previous");
+      const updateData = () => {
+        var formdata = new FormData();
 
-      const setPagination = (result) => {
-        prevButton.addEventListener("click", () => {
-          getProduct(result.previous);
-        });
+        formdata.append("name", name_event.value);
+        formdata.append("desc", desc_event.value);
 
-        let numberPage = Math.ceil(result.count / limit);
-        // console.log(numberPage);
-        let offset = 0;
-        let showPage = "";
-        for (let i = 0; i < numberPage; i++) {
-          let query = `${server}/event/?limit=${limit}&offset=${offset}`;
-          offset += limit;
-          showPage += `
-            <li class="page-item" style="cursor: pointer" onclick="getProduct('${query}')">
-                <a class="page-link">${i + 1}</a>
-            </li>`;
+        if (imageFile_event.files.length > 0) {
+          formdata.append(
+            "image",
+            imageFile_event.files[0],
+            imageFile_event.value
+          );
         }
-        // console.log(showPage);
-        document.querySelector(".dataOther").innerHTML = showPage;
 
-        if (result.next == null) {
-          nextButton.classList.add("disabled");
-        } else {
-          nextButton.classList.remove("disabled");
-          nextButton.addEventListener("click", () => {
-            getProduct(result.next);
-          });
-        }
-      };
-
-      const deleteProduct = (id) => {
-        const myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        const raw = `{id : ${id}}`;
-
-        const requestOptions = {
-          method: "DELETE",
-          headers: myHeaders,
-          body: raw,
+        var requestOptions = {
+          method: "PATCH",
+          body: formdata,
           redirect: "follow",
         };
 
-        fetch(`${server}/event/${id}`, requestOptions)
+        fetch(`${server}/event/${id}/`, requestOptions)
           .then((response) => response.text())
-          .then((result) => {
-            location.reload();
-          })
+          .then((result) => console.log(result))
           .catch((error) => console.log("error", error));
       };
 
-      getProduct(`${server}/event/?limit=${limit}&offset=0`);
+      fetchAPI(`${server}/event/${id}/`, "GET").then((result) => {
+        name_event.value = result.name;
+        desc_event.value = result.desc;
+        image_event.innerHTML = `<img style="width:100%" src="${result.image}">`;
+      });
     </script>
   </body>
 </html>

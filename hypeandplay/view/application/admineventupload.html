@@ -239,54 +239,67 @@
           <!-- Table Title Ends -->
 
           <!-- Table Form Starts -->
-          <div class="table-form">
-            <div class="row">
-              <div class="col-3">
-                <p class="product-insert-title">Event Name</p>
+          <form
+            action="http://127.0.0.1:8000/event/"
+            enctype="multipart/form-data"
+            method="post"
+            target="_blank"
+          >
+            <div class="table-form">
+              <div class="row">
+                <div class="col-3">
+                  <p class="product-insert-title">Event Name</p>
+                </div>
+                <div class="col-md-8 col-9">
+                  <input
+                    class="form-control name"
+                    type="text"
+                    name="name"
+                    placeholder="Event Name"
+                  />
+                </div>
               </div>
-              <div class="col-md-8 col-9">
-                <input
-                  class="form-control"
-                  type="text"
-                  placeholder="Event Name"
-                />
+              <br />
+              <div class="row">
+                <div class="col-3">
+                  <p class="product-insert-title">Upload Photo</p>
+                </div>
+                <div class="col-md-8 col-9">
+                  <button class="btn btn-outline-light">
+                    <input
+                      type="file"
+                      name="image"
+                      id="image"
+                      class="image"
+                    />Upload Photo
+                  </button>
+                </div>
+              </div>
+              <br />
+              <div class="row">
+                <div class="col-3">
+                  <p class="product-insert-title">Description</p>
+                </div>
+                <div class="col-md-8 col-9">
+                  <textarea
+                    class="form-control desc"
+                    id="exampleFormControlTextarea1"
+                    rows="10"
+                    name="desc"
+                    placeholder="Event Description"
+                  ></textarea>
+                </div>
+              </div>
+              <br />
+              <div class="row">
+                <div
+                  class="offset-3 offset-lg-3 offset-md-3 offset-sm-3 col-lg-2 col-md-3 col-sm-4 col-4"
+                >
+                  <button class="btn btn-block btn-success">Submit</button>
+                </div>
               </div>
             </div>
-            <br />
-            <div class="row">
-              <div class="col-3">
-                <p class="product-insert-title">Upload Photo</p>
-              </div>
-              <div class="col-md-8 col-9">
-                <button class="btn btn-outline-light">Upload Photo</button>
-              </div>
-            </div>
-            <br />
-            <div class="row">
-              <div class="col-3">
-                <p class="product-insert-title">Description</p>
-              </div>
-              <div class="col-md-8 col-9">
-                <textarea
-                  class="form-control"
-                  id="exampleFormControlTextarea1"
-                  rows="10"
-                  placeholder="Event Description"
-                ></textarea>
-              </div>
-            </div>
-            <br />
-            <div class="row">
-              <div
-                class="offset-3 offset-lg-3 offset-md-3 offset-sm-3 col-lg-2 col-md-3 col-sm-4 col-4"
-              >
-                <button class="btn btn-block btn-success">Submit</button>
-              </div>
-              <div class="col-lg-2 col-md-3 col-sm-4 col-4">
-                <button class="btn btn-block btn-danger">Cancel</button>
-              </div>
-            </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
