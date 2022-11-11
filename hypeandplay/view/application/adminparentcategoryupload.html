@@ -190,6 +190,14 @@
                 <i class="fa-solid fa-bullhorn"></i> Product
               </button></a
             >
+            <a href="adminCategory.html"
+              ><button
+                type="button"
+                class="btn btn-outline-light horn font-weight-bold text-center w-75"
+              >
+                <i class="fa-solid fa-bullhorn"></i> Category
+              </button>
+            </a>
             <a href="adminPromo.html"
               ><button
                 type="button"
@@ -231,32 +239,41 @@
           <!-- Table Title Ends -->
 
           <!-- Table Form Starts -->
-          <div class="table-form">
-            <div class="row">
-              <div class="col-3">
-                <p class="product-insert-title">Parent Category Name</p>
+          <form
+            action="http://127.0.0.1:8000/category/"
+            enctype="multipart/form-data"
+            method="post"
+            target="_blank"
+          >
+            <div class="table-form">
+              <div class="row">
+                <div class="col-3">
+                  <p class="product-insert-title">Parent Category Name</p>
+                </div>
+                <div class="col-md-8 col-9">
+                  <input
+                    class="form-control"
+                    name="name_category"
+                    type="text"
+                    placeholder="Product Category"
+                  />
+                  <input type="hidden" name="parent_category" value="0" />
+                </div>
               </div>
-              <div class="col-md-8 col-9">
-                <input
-                  class="form-control"
-                  name="category"
-                  type="text"
-                  placeholder="Product Category"
-                />
+              <br />
+              <div class="row">
+                <div
+                  class="offset-3 offset-lg-3 offset-md-3 offset-sm-3 col-lg-2 col-md-3 col-sm-4 col-4"
+                >
+                  <input
+                    class="btn btn-block btn-success"
+                    type="submit"
+                    value="Submit"
+                  />
+                </div>
               </div>
             </div>
-            <br />
-            <div class="row">
-              <div
-                class="offset-3 offset-lg-3 offset-md-3 offset-sm-3 col-lg-2 col-md-3 col-sm-4 col-4"
-              >
-                <button class="btn btn-block btn-success">Submit</button>
-              </div>
-              <div class="col-lg-2 col-md-3 col-sm-4 col-4">
-                <button class="btn btn-block btn-danger">Cancel</button>
-              </div>
-            </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

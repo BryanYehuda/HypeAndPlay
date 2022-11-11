@@ -177,6 +177,9 @@
             <button class="btn btn-danger">Logout</button>
           </div>
         </div>
+        <!--Profile staff Ends-->
+
+        <!--Sidebar Starts-->
         <div class="slider-body">
           <div class="navkiri">
             <a href="adminproduct.html"
@@ -221,21 +224,18 @@
             >
           </div>
         </div>
+        <!--Sidebar Ends-->
       </div>
+
+      <!-- Main Admin Area Starts -->
       <div class="main-pages">
         <div class="container-fluid">
+          <!-- Table Title Starts -->
           <div class="row">
             <div class="col-5">
-              <h2 class="text-title">Product List</h2>
+              <h2 class="text-title">Category List</h2>
             </div>
             <div class="col-7">
-              <button
-                type="button"
-                class="btn btn-success float-right"
-                onclick="location.href='adminproductupload.html'"
-              >
-                Add Product<i class="bi bi-plus" style="margin-left: 5px"></i>
-              </button>
               <div class="dropdown dropdown-table">
                 <button
                   class="btn btn-primary dropdown-toggle float-right d-lg-none"
@@ -261,6 +261,9 @@
               </div>
             </div>
           </div>
+          <!-- Table Title Ends -->
+
+          <!-- Table Search Starts -->
           <div class="row float-right table-search">
             <div class="dropdown dropdown-table">
               <button
@@ -271,35 +274,38 @@
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                Category
+                Add Category
               </button>
               <div
                 class="dropdown-menu dropdown-menu-right"
-                id="category"
                 aria-labelledby="dropdownMenuButton"
               >
-                <!-- <a class="dropdown-item" href="#">Category 1</a>
-                <a class="dropdown-item" href="#">Category 2</a>
-                <a class="dropdown-item" href="#">Category 3</a> -->
+                <a class="dropdown-item" href="adminparentcategoryupload.html"
+                  >Add Parent Category</a
+                >
+                <a class="dropdown-item" href="adminchildcategoryupload.html"
+                  >Add Child Category</a
+                >
               </div>
             </div>
             <form class="form-inline">
               <input
-                class="form-control mr-sm-2 searchQuery"
+                class="form-control mr-sm-2"
                 type="search"
-                name="searchQuery"
                 placeholder="Search"
                 aria-label="Search"
               />
               <button
                 class="btn btn-outline-light my-2 my-sm-0 btn-navbar d-none d-sm-block"
                 type="submit"
-                onclick="event.preventDefault(); searchByName()"
               >
                 <i class="bi bi-search"></i>
               </button>
             </form>
           </div>
+          <!-- Table Search Ends -->
+
+          <!-- Table Data Starts-->
           <div class="table-responsive">
             <table
               id="tablemain"
@@ -308,17 +314,16 @@
             >
               <thead>
                 <tr>
-                  <th scope="col">Image</th>
                   <th scope="col">Name</th>
-                  <th scope="col">Price</th>
-                  <th scope="col">Stock</th>
-                  <th scope="col">Status</th>
                   <th scope="col">Action</th>
                 </tr>
               </thead>
-              <tbody class="produkListItem"></tbody>
+              <tbody class="productListItem"></tbody>
             </table>
           </div>
+          <!-- Table Data Ends -->
+
+          <!-- Next Table Starts-->
           <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-end">
               <li class="page-item previous" style="cursor: pointer">
@@ -331,9 +336,14 @@
               </li>
             </ul>
           </nav>
+          <!-- Next Table Ends-->
         </div>
       </div>
+      <!-- Main Admin Area Ends -->
     </div>
+    <!-- Slider Profile Admin Ends -->
+
+    <!-- Script Starts -->
     <script
       src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
       integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -350,6 +360,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    <!-- Script Ends -->
     <script>
       const server = "http://127.0.0.1:8000";
       const limit = 5;
@@ -384,15 +395,9 @@
         const statusProduct = data.status == true ? "checked" : "";
         product += `
                     <tr>
-                        <td class="align-middle"><img src=${data.images} width="100"></td>
-                        <td class="align-middle">${data.name}</td>
-                        <td class="align-middle">${data.price}</td>
-                        <td class="align-middle">${data.stock}</td>
+                        <td class="align-middle">${data.category}</td>
                         <td class="align-middle">
-                            <input type="checkbox" id="${data.id}" class="statusProduct" ${statusProduct} onchange="updateData(this)" data-toggle="toggle" data-onstyle="outline-success" data-offstyle="outline-danger">
-                        </td>
-                        <td class="align-middle">
-                            <a href="adminproductEdit.html?id=${data.id}" style="color:white"><i class="bi bi-pencil ml-1" style="cursor:pointer"></i></a>
+                            <a href="admincategoryEdit.html?id=${data.id}" style="color:white"><i class="bi bi-pencil ml-1" style="cursor:pointer"></i></a>
                             <a><i class="bi bi-trash" style="cursor:pointer" onclick="deleteProduct('${data.id}')"></i></a>
                         </td>
                     </tr>
@@ -400,85 +405,14 @@
         return product;
       };
 
-      const processProduct = (result) => {
-        let allProduct = ``;
-        result.forEach((data) => {
-          allProduct += showProduct(data);
-        });
-        document.querySelector(".produkListItem").innerHTML = allProduct;
-      };
-
-      const showDataProductFilter = (result, category) => {
-        let allProduct = ``;
-        result.forEach((data) => {
-          if (data.category == category) {
-            allProduct += showProduct(data);
-          }
-        });
-        document.querySelector(".produkListItem").innerHTML = allProduct;
-      };
-
-      const updateData = (event) => {
-        const myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        const raw = JSON.stringify({
-          status: event.checked,
-        });
-
-        const requestOptions = {
-          method: "PATCH",
-          headers: myHeaders,
-          body: raw,
-          redirect: "follow",
-        };
-
-        fetch(`http://127.0.0.1:8000/product/${event.id}/`, requestOptions)
-          .then((response) => response.text())
-          .then((result) => console.log(result))
-          .catch((error) => console.log("error", error));
-      };
-
-      const deleteProduct = (id) => {
-        const myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        const raw = `{id : ${id}}`;
-
-        const requestOptions = {
-          method: "DELETE",
-          headers: myHeaders,
-          body: raw,
-          redirect: "follow",
-        };
-
-        fetch(`${server}/product/${id}`, requestOptions)
-          .then((response) => response.text())
-          .then((result) => {
-            location.reload();
-          })
-          .catch((error) => console.log("error", error));
-      };
-
-      const searchByName = (e) => {
-        const inputUser = document.querySelector(".searchQuery").value;
-
-        if (inputUser === "") {
-          return alert("Masukkan judul yang dicari");
-        } else {
-          getProduct(
-            `${server}/product/?search=${inputUser}&limit=${limit}&offset=0`
-          );
-        }
-      };
-
       let allCategory = ``;
 
       const processChild = (result) => {
         result.forEach((data) => {
           if (data.child.length == 0) {
-            allCategory += `<a class="dropdown-item" onclick="getDataByCat('${data.id}')">${data.category}</a>`;
+            allCategory += showProduct(data);
           } else if (data.child.length != 0) {
+            allCategory += showProduct(data);
             processChild(data.child);
           }
         });
@@ -487,78 +421,24 @@
       const processCategory = (result) => {
         result.forEach((data) => {
           if (data.child.length == 0) {
-            allCategory += `<a class="dropdown-item" onclick="getDataByCat('${data.id}')">${data.category}</a>`;
+            allCategory += showProduct(data);
           } else if (data.child.length != 0) {
+            allCategory += showProduct(data);
             processChild(data.child);
           }
         });
-        document.querySelector("#category").innerHTML = allCategory;
+        document.querySelector(".productListItem").innerHTML = allCategory;
       };
 
-      const getDataByCat = (category) => {
-        fetchAPI(`${server}/product/`, "GET")
+      const getProduct = (query) => {
+        fetchAPI(query, "GET")
           .then((result) => {
-            showDataProductFilter(result.results, category);
-            $(function () {
-              $(".statusProduct").bootstrapToggle();
-            });
+            processCategory(result.result);
           })
           .catch((error) => console.log("error", error));
       };
 
-      let nextButton = document.querySelector(".next");
-      let prevButton = document.querySelector(".previous");
-
-      const setPagination = (result) => {
-        prevButton.addEventListener("click", () => {
-          getProduct(result.previous);
-        });
-
-        let numberPage = Math.ceil(result.count / limit);
-        // console.log(numberPage);
-        let offset = 0;
-        let showPage = "";
-        for (let i = 0; i < numberPage; i++) {
-          let query = `${server}/product/?limit=${limit}&offset=${offset}`;
-          offset += limit;
-          showPage += `
-            <li class="page-item" style="cursor: pointer" onclick="getProduct('${query}')">
-                <a class="page-link">${i + 1}</a>
-            </li>`;
-        }
-        // console.log(showPage);
-        document.querySelector(".dataOther").innerHTML = showPage;
-
-        if (result.next == null) {
-          nextButton.classList.add("disabled");
-        } else {
-          nextButton.classList.remove("disabled");
-          nextButton.addEventListener("click", () => {
-            getProduct(result.next);
-          });
-        }
-      };
-
-      const getProduct = (link) => {
-        fetchAPI(link, "GET")
-          .then((result) => {
-            processProduct(result.results);
-            setPagination(result);
-            $(function () {
-              $(".statusProduct").bootstrapToggle();
-            });
-          })
-          .catch((error) => console.log("error", error));
-      };
-
-      getProduct(`${server}/product/?limit=${limit}&offset=0`);
-
-      fetchAPI(`${server}/category/`, "GET")
-        .then((result) => {
-          processCategory(result.result);
-          $(".dropdown-toggle").dropdown();
-        })
-        .catch((error) => console.log("error", error));
+      getProduct(`${server}/category/`);
     </script>
   </body>
 </html>

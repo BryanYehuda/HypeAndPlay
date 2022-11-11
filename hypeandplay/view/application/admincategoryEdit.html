@@ -239,56 +239,52 @@
           <!-- Table Title Ends -->
 
           <!-- Table Form Starts -->
-          <form
-            action="http://127.0.0.1:8000/category/"
-            enctype="multipart/form-data"
-            method="post"
-            target="_blank"
-          >
-            <div class="table-form">
-              <div class="row">
-                <div class="col-3">
-                  <p class="product-insert-title">Parent Category Name</p>
-                </div>
-                <br />
-                <div class="col-8">
-                  <div class="dropdown dropdown-table">
-                    <!-- <button class="btn btn-outline-light dropdown-toggle float-left" type="button" id="type" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+          <div class="table-form">
+            <div class="row">
+              <div class="col-3">
+                <p class="product-insert-title">Parent Category Name</p>
+              </div>
+              <br />
+              <div class="col-8">
+                <div class="dropdown dropdown-table">
+                  <!-- <button class="btn btn-outline-light dropdown-toggle float-left" type="button" id="type" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                   Choose Category
                                 </button> -->
-                    <select
-                      class="btn btn-outline-light dropdown-toggle"
-                      name="parent_category"
-                      id="category"
-                      style="text-align: left"
-                    ></select>
-                  </div>
-                </div>
-              </div>
-              <br />
-              <div class="row">
-                <div class="col-3">
-                  <p class="product-insert-title">Category Name</p>
-                </div>
-                <div class="col-md-8 col-9">
-                  <input
-                    class="form-control"
-                    name="name_category"
-                    type="text"
-                    placeholder="Product Category"
-                  />
-                </div>
-              </div>
-              <br />
-              <div class="row">
-                <div
-                  class="offset-3 offset-lg-3 offset-md-3 offset-sm-3 col-lg-2 col-md-3 col-sm-4 col-4"
-                >
-                  <button class="btn btn-block btn-success">Submit</button>
+                  <select
+                    class="btn btn-outline-light dropdown-toggle parent_category"
+                    name="parent_category"
+                    id="category"
+                    style="text-align: left"
+                  ></select>
                 </div>
               </div>
             </div>
-          </form>
+            <br />
+            <div class="row">
+              <div class="col-3">
+                <p class="product-insert-title">Category Name</p>
+              </div>
+              <div class="col-md-8 col-9">
+                <input
+                  class="form-control name_category"
+                  name="name_category"
+                  type="text"
+                  placeholder="Product Category"
+                />
+              </div>
+            </div>
+            <br />
+            <div class="row">
+              <div
+                class="offset-3 offset-lg-3 offset-md-3 offset-sm-3 col-lg-2 col-md-3 col-sm-4 col-4"
+              >
+                <button class="btn btn-block btn-success submitForm">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -344,12 +340,12 @@
       const showProduct = (data) => {
         let product = ``;
         product += `
-        <option value="${data.id}">${data.category}</option>
+        <option class="parent_${data.id}" value="${data.id}">${data.category}</option>
                 `;
         return product;
       };
 
-      let allCategory = ``;
+      let allCategory = `<option class="parent_0" value="0">Tidak Mempunyai Parent</option>`;
 
       const processChild = (result) => {
         result.forEach((data) => {
@@ -384,6 +380,47 @@
       };
 
       getProduct(`${server}/category/`);
+
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const id = urlParams.get("id");
+
+      document.querySelector(".submitForm").addEventListener("click", () => {
+        updateData();
+      });
+
+      const name_category = document.querySelector(".name_category");
+      let parent_category;
+
+      const updateData = () => {
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        const raw = JSON.stringify({
+          name_category: name_category.value,
+          parent_category: document.querySelector(".parent_category").value,
+        });
+
+        const requestOptions = {
+          method: "PATCH",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow",
+        };
+
+        fetch(`http://127.0.0.1:8000/category/${id}/`, requestOptions)
+          .then((response) => response.text())
+          .then((result) => console.log(result))
+          .catch((error) => console.log("error", error));
+      };
+
+      fetchAPI(`${server}/category/${id}`, "GET").then((result) => {
+        parent_category = document
+          .querySelector(`.parent_${result.parent_category}`)
+          .setAttribute("selected", "selected");
+
+        name_category.value = result.name_category;
+      });
     </script>
   </body>
 </html>
