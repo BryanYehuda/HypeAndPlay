@@ -222,29 +222,7 @@
 
     <!-- Ad Banner Starts -->
     <div class="ad-banner">
-      <div class="owl-carousel owl-theme text-center">
-        <div class="item">
-          <img
-            src="../img/common/AdBanner.png"
-            class="img-fluid"
-            alt="ad-banner"
-          />
-        </div>
-        <div class="item">
-          <img
-            src="../img/common/AdBanner.png"
-            class="img-fluid"
-            alt="ad-banner"
-          />
-        </div>
-        <div class="item">
-          <img
-            src="../img/common/AdBanner.png"
-            class="img-fluid"
-            alt="ad-banner"
-          />
-        </div>
-      </div>
+      <div class="owl-carousel owl-theme text-center bannerData"></div>
       <div class="row">
         <div class="col-6">
           <div
@@ -436,19 +414,6 @@
 
     <!-- Carousel Script Starts -->
     <script>
-      $(".owl-carousel").owlCarousel({
-        loop: true,
-        margin: 10,
-        responsiveClass: true,
-        responsive: {
-          0: {
-            items: 1,
-            nav: false,
-          },
-        },
-      });
-    </script>
-    <script>
       const server = "http://127.0.0.1:8000";
       const limit = 5;
       const status = (response) => {
@@ -609,6 +574,38 @@
         .then((result) => {
           processCategory(result.result);
           $(".dropdown-toggle").dropdown();
+        })
+        .catch((error) => console.log("error", error));
+
+      const showBanner = (result) => {
+        let bannerData = ``;
+        result.forEach((data) => {
+          bannerData += `
+          <div class="item">
+            <img
+              src="${data.image}" style="width:100%;height:300px"
+              class="img-fluid"
+              alt="ad-banner"
+            />
+          </div>`;
+        });
+        document.querySelector(".bannerData").innerHTML = bannerData;
+      };
+
+      fetchAPI(`${server}/adbanner/`, "GET")
+        .then((result) => {
+          showBanner(result.results);
+          $(".owl-carousel").owlCarousel({
+            loop: true,
+            margin: 10,
+            responsiveClass: true,
+            responsive: {
+              0: {
+                items: 1,
+                nav: false,
+              },
+            },
+          });
         })
         .catch((error) => console.log("error", error));
     </script>

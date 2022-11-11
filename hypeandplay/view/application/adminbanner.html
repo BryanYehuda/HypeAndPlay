@@ -402,7 +402,7 @@
         let offset = 0;
         let showPage = "";
         for (let i = 0; i < numberPage; i++) {
-          let query = `${server}/product/?limit=${limit}&offset=${offset}`;
+          let query = `${server}/adbanner/?limit=${limit}&offset=${offset}`;
           offset += limit;
           showPage += `
             <li class="page-item" style="cursor: pointer" onclick="getProduct('${query}')">
