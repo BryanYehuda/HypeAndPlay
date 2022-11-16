@@ -1,189 +1,79 @@
 <!DOCTYPE html>
 <html lang="id">
-  <head>
+
+<head>
     <!-- Meta Starts -->
     <title>Hype and Play - Admin Detail</title>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Hype And Play adalah Toko Hobby yang berbasis di Surabaya"
-    />
+    <meta name="description" content="Hype And Play adalah Toko Hobby yang berbasis di Surabaya" />
     <meta name="author" content="Jupiter Development" />
     <meta name="theme-color" content="#10122b" />
     <!-- Meta Ends -->
 
     <!-- Link Starts -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css" />
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="../css/admin.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="preload"
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap"
-      as="font"
-    />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" as="font" />
     <!-- Link Ends -->
 
     <!-- Icon Starts -->
-    <link
-      rel="apple-touch-icon"
-      sizes="57x57"
-      href="../img/icon/apple-icon-57x57.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="60x60"
-      href="../img/icon/apple-icon-60x60.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="72x72"
-      href="../img/icon/apple-icon-72x72.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="76x76"
-      href="../img/icon/apple-icon-76x76.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="114x114"
-      href="../img/icon/apple-icon-114x114.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="120x120"
-      href="../img/icon/apple-icon-120x120.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="144x144"
-      href="../img/icon/apple-icon-144x144.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="152x152"
-      href="../img/icon/apple-icon-152x152.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="../img/icon/apple-icon-180x180.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="36x36"
-      href="../img/icon/android-icon-36x36.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="48x48"
-      href="../img/icon/android-icon-48x48.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="72x72"
-      href="../img/icon/android-icon-72x72.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="96x96"
-      href="../img/icon/android-icon-96x96.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="144x144"
-      href="../img/icon/android-icon-144x144.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="192x192"
-      href="../img/icon/android-icon-192x192.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="../img/icon/favicon-16x16.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="../img/icon/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="96x96"
-      href="../img/icon/favicon-96x96.png"
-    />
+    <link rel="apple-touch-icon" sizes="57x57" href="../img/icon/apple-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="../img/icon/apple-icon-60x60.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="../img/icon/apple-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../img/icon/apple-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="../img/icon/apple-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="../img/icon/apple-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="../img/icon/apple-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="../img/icon/apple-icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../img/icon/apple-icon-180x180.png" />
+    <link rel="icon" type="image/png" sizes="36x36" href="../img/icon/android-icon-36x36.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="../img/icon/android-icon-48x48.png" />
+    <link rel="icon" type="image/png" sizes="72x72" href="../img/icon/android-icon-72x72.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="../img/icon/android-icon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="144x144" href="../img/icon/android-icon-144x144.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="../img/icon/android-icon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../img/icon/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../img/icon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="../img/icon/favicon-96x96.png" />
     <!-- Icon Ends -->
-  </head>
+</head>
 
-  <body>
+<body>
     <div class="wrapper">
-      <!-- Slider Profile Admin Starts -->
+        <!-- Slider Profile Admin Starts -->
 
-      <div class="slider d-none d-lg-block" id="sliders">
-        <!--Profile staff Starts-->
-        <div class="slider-head">
-          <div class="text-center layzload">
-            <img
-              src="../img/admin/logoadminhitam.png"
-              alt="Logo Admin"
-              class="logoadmin mt-5"
-            />
-          </div>
-          <div class="d-block pt-4 pb-3 px-3 text-center">
-            <img
-              src="../img/admin/adminpic.png "
-              alt="User"
-              class="slider-img-user rounded mx-auto d-block d-flex flex-wrap layzload"
-            />
-            <h5
-              class="font-weight-bold mb-0 1h-1m text-white"
-              style="
+        <div class="slider d-none d-lg-block" id="sliders">
+            <!--Profile staff Starts-->
+            <div class="slider-head">
+                <div class="text-center layzload">
+                    <img src="../img/admin/logoadminhitam.png" alt="Logo Admin" class="logoadmin mt-5" />
+                </div>
+                <div class="d-block pt-4 pb-3 px-3 text-center">
+                    <img src="../img/admin/adminpic.png " alt="User" class="slider-img-user rounded mx-auto d-block d-flex flex-wrap layzload" />
+                    <h5 class="font-weight-bold mb-0 1h-1m text-white" style="
                 text-align: center;
                 margin-top: 5px;
                 font-family: excluded;
                 font-size: 15px;
-              "
-            >
-              Staff PIC
-            </h5>
-            <p class="staff text-white" style="text-align: center">Staff</p>
-            <button class="btn btn-danger">Logout</button>
-          </div>
-        </div>
-        <!--Profile staff Ends-->
+              ">
+                        Staff PIC
+                    </h5>
+                    <p class="staff text-white" style="text-align: center">Staff</p>
+                    <button class="btn btn-danger">Logout</button>
+                </div>
+            </div>
+            <!--Profile staff Ends-->
 
-        <!--Sidebar Starts-->
-        <div class="slider-body">
-          <div class="navkiri">
-            <a href="adminproduct.html"
-              ><button
+            <!--Sidebar Starts-->
+            <div class="slider-body">
+                <div class="navkiri">
+                    <a href="adminproduct.html"><button
                 type="button"
                 class="btn btn-outline-light horn font-weight-bold text-center w-75"
               >
@@ -198,8 +88,7 @@
                 <i class="fa-solid fa-bullhorn"></i> Category
               </button>
             </a>
-            <a href="adminPromo.html"
-              ><button
+                    <a href="adminPromo.html"><button
                 type="button"
                 class="btn btn-outline-light horn font-weight-bold text-center w-75"
               >
@@ -240,7 +129,7 @@
 
           <!-- Table Form Starts -->
           <form
-            action="http://127.0.0.1:8000/event/"
+            action="http://www.hypeandplayserver.com/event/"
             enctype="multipart/form-data"
             method="post"
             target="_blank"
