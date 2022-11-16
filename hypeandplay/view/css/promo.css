@@ -224,5 +224,6 @@ footer {
     background-position: bottom;
     background-size: 100%;
     min-height: 500px;
+    padding-top: 750px;
     clear: both;
 }
