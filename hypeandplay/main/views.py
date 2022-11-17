@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import viewsets, filters
+from rest_framework import viewsets, filters, mixins
 from django_filters.rest_framework import DjangoFilterBackend
 from . import models
 from . import serializer
@@ -11,6 +11,34 @@ from drf_spectacular.utils import extend_schema
 
 # Create your views here.
 
+class SignUpViewset(mixins.CreateModelMixin,viewsets.GenericViewSet):
+    serializer_class = serializer.SignUpSerializer
+    
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        data = serializer.data
+        user = models.Admin.objects.get_or_create(**data)
+        if not user[1]:
+            return Response({"result" : "User already exists"})
+        return Response({"result" :"User has been created"})
+
+class LoginViewset(viewsets.GenericViewSet):
+    serializer_class = serializer.LoginSerializer
+    
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        data = serializer.data
+        user = models.Admin.objects.filter(username = data['username']).first()
+        print(models.Admin.objects.all())
+        if user is None:
+            return Response({"result" : "User not found"})
+        
+        if user.password != data['password']:
+            return Response({"result" : "Password Incorect"})
+
+        return Response({"result" : "Success"})
 
 class CategoryViewset(viewsets.ModelViewSet):
     serializer_class = serializer.CategorySerializer

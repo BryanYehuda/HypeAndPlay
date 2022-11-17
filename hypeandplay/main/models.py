@@ -9,6 +9,7 @@ import uuid
 class Admin(models.Model):
     username = models.CharField(max_length = 255)
     name = models.CharField(max_length = 255)
+    password = models.CharField(max_length=255, default = "admin")
 
 
 class Category(models.Model):
