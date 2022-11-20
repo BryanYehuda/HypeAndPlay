@@ -159,9 +159,6 @@ class ProductViewset(viewsets.ModelViewSet):
     def update(self, request, *args, **kwargs):
         obj = self.get_object()
 
-        if "images" in request.data.keys():
-            models.Image.objects.filter(product_id=obj.id).delete()
-
         partial = kwargs.pop("partial", False)
         instance = self.get_object()
         serializer = self.get_serializer(instance, data=request.data, partial=partial)
@@ -169,12 +166,15 @@ class ProductViewset(viewsets.ModelViewSet):
         self.perform_update(serializer)
         
         data = serializer.data
-        img = request.data.pop("images", [])
-        if img is not None:
-            for i in img:
-                img = models.Image.objects.create(image=i, product_id=obj)
-                img.save()
-            data["images"] = self.get_url_image(obj.id)
+
+        if "images" in request.data.keys():
+            models.Image.objects.filter(product_id=obj.id).delete()
+            img = request.data.pop("images", [])
+            if img is not None:
+                for i in img:
+                    img = models.Image.objects.create(image=i, product_id=obj)
+                    img.save()
+                data["images"] = self.get_url_image(obj.id)
 
         return Response(data)
 
