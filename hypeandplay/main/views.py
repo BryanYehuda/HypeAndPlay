@@ -159,7 +159,8 @@ class ProductViewset(viewsets.ModelViewSet):
     def update(self, request, *args, **kwargs):
         obj = self.get_object()
 
-        models.Image.objects.filter(product_id=obj.id).delete()
+        if "images" in request.data.keys():
+            models.Image.objects.filter(product_id=obj.id).delete()
 
         partial = kwargs.pop("partial", False)
         instance = self.get_object()
