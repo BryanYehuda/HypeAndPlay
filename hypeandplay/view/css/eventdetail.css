@@ -20,6 +20,10 @@ html {
 
 body {
     background-color: #10122b;
+    background-image: url(../img/common/BG.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: repeat-y;
 }
 
 
@@ -148,6 +152,5 @@ footer {
     background-position: bottom;
     background-size: 100%;
     min-height: 500px;
-    padding-top: 750px;
     clear: both;
 }
