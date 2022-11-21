@@ -2,6 +2,16 @@ from attr import fields
 from rest_framework import serializers
 from . import models
 
+class LoginSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Admin
+        fields = ["username", "password"]
+        
+class SignUpSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Admin
+        fields = "__all__"
+
 class CategorySerializer(serializers.ModelSerializer):
     
     class Meta:
