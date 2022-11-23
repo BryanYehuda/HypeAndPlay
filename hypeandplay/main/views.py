@@ -9,6 +9,8 @@ from django.db.models.query import QuerySet
 
 from drf_spectacular.utils import extend_schema
 
+from rest_framework.permissions import IsAuthenticated
+
 # Create your views here.
 
 class SignUpViewset(mixins.CreateModelMixin,viewsets.GenericViewSet):
@@ -31,12 +33,12 @@ class LoginViewset(viewsets.GenericViewSet):
         serializer.is_valid(raise_exception=True)
         data = serializer.data
         user = models.Admin.objects.filter(username = data['username']).first()
-        print(models.Admin.objects.all())
         if user is None:
             return Response({"result" : "User not found"})
         
         if user.password != data['password']:
             return Response({"result" : "Password Incorect"})
+
 
         return Response({"result" : "Success"})
 
@@ -62,6 +64,13 @@ class CategoryViewset(viewsets.ModelViewSet):
             result = {"category": i.name_category, "child": child, "id": i.id}
             res.append(result)
         return res
+    
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        data = serializer.data
+        data = {**data, "child" : self.get_child(data['id'])}
+        return Response(data)
 
 
 class PromoViewset(viewsets.ModelViewSet):
@@ -86,18 +95,23 @@ class ProductViewset(viewsets.ModelViewSet):
     filterset_fields = ["category", "stock", "price"]
     search_fields = ["name"]
     ordering_fields = ("price",)
+    # permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
 
         images = request.data.pop("images", [])
 
         data = {"images": images, "product": request.data}
-
+        
+        promo = request.data.get("promo", None)
+        if not promo:
+            no_promo = models.Promo.objects.get_or_create(promo_name = "No promo", promo_desc = "No Promo in this promo")
+            data['product']["promo"] = no_promo[0].id
         serial = self.get_serializer(data=data)
         serial.is_valid(raise_exception=True)
 
         input_prod = {**serial.data["product"]}
-
+        
         cat = models.Category.objects.get(id=int(input_prod["category"]))
         input_prod["category"] = cat
 
@@ -107,8 +121,8 @@ class ProductViewset(viewsets.ModelViewSet):
         product.save()
 
         for promo in promos:
-            prom = models.Promo.objects.get(id=int(promo))
-            product.promo.add(prom)
+            prom = models.Promo.objects.get_or_create(id=int(promo))
+            product.promo.add(prom[0])
 
         product.save()
 
