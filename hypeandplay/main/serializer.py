@@ -13,7 +13,6 @@ class SignUpSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class CategorySerializer(serializers.ModelSerializer):
-    
     class Meta:
         model = models.Category
         fields = "__all__"

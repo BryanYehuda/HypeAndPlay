@@ -64,6 +64,9 @@ REST_FRAMEWORK = {
     "EXCEPTION_HANDLER": "common.exception_handler.custom_exception_handler",
     # "EXCEPTION_HANDLER": "rest_framework.views.exception_handler",
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
 }
 
 
@@ -155,3 +158,8 @@ SPECTACULAR_SETTINGS = {
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+SIMPLE_JWT = {
+    "REFRESH_TOKEN_LIFETIME" : timedelta(hours=12),
+    "ROTATE_REFRESH_TOKEN" : True
+}

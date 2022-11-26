@@ -45,7 +45,7 @@ class Product(models.Model):
 def get_image_url(instance, files):
     key = instance.__dict__.keys()
     if "name" in key:
-        url = f"image/{instance.id}-{files}"
+        url = f"image/{instance.name}-{files}"
     elif "product_id_id" in key:
         url = f"image/{instance.product_id}-{files}"
     return url
