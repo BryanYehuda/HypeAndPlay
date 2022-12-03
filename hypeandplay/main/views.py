@@ -1,50 +1,43 @@
-from django.shortcuts import render
 from rest_framework import viewsets, filters, mixins
 from django_filters.rest_framework import DjangoFilterBackend
 from . import models
 from . import serializer
 from rest_framework.response import Response
 from .filters import ProductFilter
-from django.db.models.query import QuerySet
-
-from drf_spectacular.utils import extend_schema
 
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
-# Create your views here.
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
 
-class SignUpViewset(mixins.CreateModelMixin,viewsets.GenericViewSet):
-    serializer_class = serializer.SignUpSerializer
+from django.contrib.auth.models import User
+
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        # Add custom claims
+        token['username'] = user.username
+        # ...
+
+        return token
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
     
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        data = serializer.data
-        user = models.Admin.objects.get_or_create(**data)
-        if not user[1]:
-            return Response({"result" : "User already exists"})
-        return Response({"result" :"User has been created"})
-
-class LoginViewset(viewsets.GenericViewSet):
-    serializer_class = serializer.LoginSerializer
-    
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        data = serializer.data
-        user = models.Admin.objects.filter(username = data['username']).first()
-        if user is None:
-            return Response({"result" : "User not found"})
-        
-        if user.password != data['password']:
-            return Response({"result" : "Password Incorect"})
+from rest_framework import generics
 
 
-        return Response({"result" : "Success"})
+class RegisterView(mixins.CreateModelMixin, viewsets.GenericViewSet):
+    queryset = models.User.objects.all()
+    serializer_class = serializer.RegisterSerializer
 
 class CategoryViewset(viewsets.ModelViewSet):
     serializer_class = serializer.CategorySerializer
     queryset = models.Category.objects.all()
+    permission_classes = (IsAuthenticated,)
 
     def list(self, request, *args, **kwargs):
 
@@ -95,7 +88,7 @@ class ProductViewset(viewsets.ModelViewSet):
     filterset_fields = ["category", "stock", "price"]
     search_fields = ["name"]
     ordering_fields = ("price",)
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
 
