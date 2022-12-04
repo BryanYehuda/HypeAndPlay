@@ -417,6 +417,9 @@
 
       const status = (response) => {
         if (response.status !== 200) {
+          if (response.status === 401) {
+            window.location.href = "./loginadmin.html";
+          }
           console.log("Error : " + response.status);
           return Promise.reject(new Error(response.statusText));
         } else {
