@@ -434,6 +434,7 @@
     <!-- Script Ends -->
     <script>
       const server = "http://www.hypeandplayserver.com";
+      let userToken = localStorage.getItem("token");
 
       const status = (response) => {
         if (response.status !== 200) {
@@ -456,12 +457,16 @@
       };
 
       const fetchAPI = (url, method) => {
-        var requestOptions = {
+        let myHeaders = new Headers();
+        myHeaders.append("Authorization", `Bearer ${userToken}`);
+
+        let requestOptions = {
           method: method,
+          headers: myHeaders,
           redirect: "follow",
         };
 
-        return fetch(url).then(status).then(json).catch(error);
+        return fetch(url, requestOptions).then(status).then(json).catch(error);
       };
 
       let allCategory = ``;
@@ -515,6 +520,8 @@
       });
 
       const updateData = () => {
+        let myHeaders = new Headers();
+        myHeaders.append("Authorization", `Bearer ${userToken}`);
         var formdata = new FormData();
 
         formdata.append("name", document.querySelector(`.name_product`).value);
@@ -552,6 +559,7 @@
         var requestOptions = {
           method: "PATCH",
           body: formdata,
+          headers: myHeaders,
           redirect: "follow",
         };
 
@@ -600,7 +608,7 @@
         result.images.forEach((data) => {
           allImages += `
               <div class="col-md-3">
-                <img style="width:100%" src="http://hypeandplayserver.com${data}">  
+                <img style="width:100%" src="http://hypeandplayserver.com${data}">
               </div>
             `;
         });

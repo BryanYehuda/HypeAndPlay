@@ -318,6 +318,8 @@
     <script>
       const server = "http://www.hypeandplayserver.com";
       const limit = 5;
+      let userToken = localStorage.getItem("token");
+
       const status = (response) => {
         if (response.status !== 200) {
           if (response.status === 401) {
@@ -339,12 +341,15 @@
       };
 
       const fetchAPI = (url, method) => {
+        let myHeaders = new Headers();
+        myHeaders.append("Authorization", `Bearer ${userToken}`);
         var requestOptions = {
           method: method,
+          headers: myHeaders,
           redirect: "follow",
         };
 
-        return fetch(url).then(status).then(json).catch(error);
+        return fetch(url, requestOptions).then(status).then(json).catch(error);
       };
 
       const showProduct = (data) => {
@@ -400,6 +405,7 @@
 
       const updateData = () => {
         const myHeaders = new Headers();
+        myHeaders.append("Authorization", `Bearer ${userToken}`);
         myHeaders.append("Content-Type", "application/json");
 
         const raw = JSON.stringify({

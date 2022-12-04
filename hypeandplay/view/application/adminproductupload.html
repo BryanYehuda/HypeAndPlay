@@ -321,7 +321,9 @@
                   name="promo"
                   id="promo"
                   style="text-align: left !important"
-                ></select>
+                >
+                  <option value="1">No Promo</option>
+                </select>
               </div>
             </div>
           </div>
@@ -414,7 +416,7 @@
     <!-- Script Ends -->
     <script>
       const server = "http://www.hypeandplayserver.com";
-
+      let userToken = localStorage.getItem("token");
       const status = (response) => {
         if (response.status !== 200) {
           if (response.status === 401) {
@@ -436,12 +438,15 @@
       };
 
       const fetchAPI = (url, method) => {
+        let myHeaders = new Headers();
+        myHeaders.append("Authorization", `Bearer ${userToken}`);
         var requestOptions = {
           method: method,
+          headers: myHeaders,
           redirect: "follow",
         };
 
-        return fetch(url).then(status).then(json).catch(error);
+        return fetch(url, requestOptions).then(status).then(json).catch(error);
       };
 
       let allCategory = ``;
@@ -478,10 +483,12 @@
           // console.log(data);
           allPromo += `<option value="${data.id}">${data.promo_name}</option>`;
         });
-        document.querySelector("#promo").innerHTML = allPromo;
+        document.querySelector("#promo").innerHTML += allPromo;
       };
 
       const updateData = () => {
+        let myHeaders = new Headers();
+        myHeaders.append("Authorization", `Bearer ${userToken}`);
         var formdata = new FormData();
 
         formdata.append("name", document.querySelector(`.name_product`).value);
@@ -517,6 +524,7 @@
         var requestOptions = {
           method: "POST",
           body: formdata,
+          headers: myHeaders,
           redirect: "follow",
         };
 
@@ -529,7 +537,7 @@
             }
           })
           .then((result) => {
-            window.location.href = "/application/adminproduct.html";
+            window.location.href = "./adminproduct.html";
           })
           .catch((error) => console.log("error", error));
       };
