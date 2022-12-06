@@ -2,6 +2,7 @@ from rest_framework import serializers
 from . import models
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
+from django.contrib.auth.models import Group
 
 class RegisterSerializer(serializers.ModelSerializer):
     email = serializers.EmailField(
@@ -14,7 +15,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.User
-        fields = ('username', 'password', 'password2', 'email', 'first_name', 'last_name')
+        fields = ('username', 'password', 'password2', 'email', 'first_name', 'last_name', 'is_superuser')
         extra_kwargs = {
             'first_name': {'required': True},
             'last_name': {'required': True}
@@ -26,17 +27,27 @@ class RegisterSerializer(serializers.ModelSerializer):
 
         return attrs
 
-    def create(self, validated_data):
+    def create(self, validated_data : dict):
+        super_user = validated_data.pop('is_superuser', False)
+        if super_user:
+            staff = True
+        else:
+            staff = False
+        groups = validated_data.pop('groups', [1])
         user = models.User.objects.create(
             username=validated_data['username'],
             email=validated_data['email'],
             first_name=validated_data['first_name'],
             last_name=validated_data['last_name'],
+            is_superuser = super_user,
+            is_staff = staff
         )
-
         
         user.set_password(validated_data['password'])
         user.save()
+        g = Group.objects.all()
+        for group in groups:
+            user.groups.add(group)
 
         return user
 
