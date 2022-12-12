@@ -15,7 +15,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.User
-        fields = ('username', 'password', 'password2', 'email', 'first_name', 'last_name', 'is_superuser')
+        fields = ('username', 'password', 'password2', 'email', 'first_name', 'last_name', 'is_superuser', "groups")
         extra_kwargs = {
             'first_name': {'required': True},
             'last_name': {'required': True}
@@ -33,7 +33,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             staff = True
         else:
             staff = False
-        groups = validated_data.pop('groups', [1])
+        groups = validated_data.pop('groups', [2])
         user = models.User.objects.create(
             username=validated_data['username'],
             email=validated_data['email'],
@@ -87,3 +87,10 @@ class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Event
         fields = "__all__"
+        
+class CartSerializer(serializers.ModelSerializer):
+    user = serializers.CharField()
+    class Meta:
+        model = models.Cart
+        fields = ("items", "total_items", "user")
+        depth = 2

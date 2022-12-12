@@ -17,9 +17,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def get_token(cls, user):
         token = super().get_token(user)
 
-        # Add custom claims
         token['username'] = user.username
-        # ...
 
         return token
 
@@ -198,3 +196,32 @@ class AdBannerViewset(viewsets.ModelViewSet):
 class EventViewset(viewsets.ModelViewSet):
     queryset = models.Event.objects.all()
     serializer_class = serializer.EventSerializer
+    
+class CartViewset(viewsets.ModelViewSet):
+    queryset = models.Cart.objects.all()
+    serializer_class = serializer.CartSerializer
+    permission_classes = [IsAuthenticated]
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        print(serializer.data)
+        data = serializer.data
+        item = models.Product.objects.filter(id = data['items']).first()
+        user = models.User.objects.filter(username = data['user']).first()
+        total = item.price * data['total_items']
+        
+        res = {
+            "user" : user,
+            "total" : total,
+            "items" : item ,
+            "total_items" : data['total_items']
+        }
+        
+        models.Cart.objects.create(
+            **res
+        )
+        
+        data['total'] = total
+        
+        return Response(data)
