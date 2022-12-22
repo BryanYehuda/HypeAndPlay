@@ -142,6 +142,7 @@
                   aria-labelledby="type"
                 >
                 <a class="dropdown-item" href="adminproduct.html">Product</a>
+                    <a class="dropdown-item" href="adminCategory.html">Category</a>
                     <a class="dropdown-item" href="adminPromo.html">Promo</a>
                     <a class="dropdown-item" href="adminevent.html">Event</a>
                     <a class="dropdown-item" href="adminbanner.html">Banner</a>
@@ -326,22 +327,12 @@
 
         let allCategory = ``;
 
-        const processChild = (result) => {
-            result.forEach((data) => {
-                if (data.child.length == 0) {
-                    allCategory += `<a class="dropdown-item" onclick="getDataByCat('${data.id}')">${data.category}</a>`;
-                } else if (data.child.length != 0) {
-                    processChild(data.child);
-                }
-            });
-        };
-
         const processCategory = (result) => {
             result.forEach((data) => {
-                if (data.child.length == 0) {
-                    allCategory += `<a class="dropdown-item" onclick="getDataByCat('${data.id}')">${data.category}</a>`;
-                } else if (data.child.length != 0) {
-                    processChild(data.child);
+                allCategory += `<a class="dropdown-item" onclick="getDataByCat('${data.id}')">${data.category}</a>`;
+                
+                if (data.child.length != 0) {
+                  processCategory(data.child);
                 }
             });
             document.querySelector("#category").innerHTML = allCategory;
