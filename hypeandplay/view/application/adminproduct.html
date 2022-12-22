@@ -327,12 +327,22 @@
 
         let allCategory = ``;
 
-        const processCategory = (result) => {
+        const processChild = (result) => {
             result.forEach((data) => {
                 allCategory += `<a class="dropdown-item" onclick="getDataByCat('${data.id}')">${data.category}</a>`;
                 
                 if (data.child.length != 0) {
-                  processCategory(data.child);
+                    processChild(data.child);
+                }
+            });
+        };
+
+        const processCategory = (result) => {
+            result.forEach((data) => {
+                if (data.child.length == 0) {
+                    allCategory += `<a class="dropdown-item" onclick="getDataByCat('${data.id}')">${data.category}</a>`;
+                } else if (data.child.length != 0) {
+                    processChild(data.child);
                 }
             });
             document.querySelector("#category").innerHTML = allCategory;
