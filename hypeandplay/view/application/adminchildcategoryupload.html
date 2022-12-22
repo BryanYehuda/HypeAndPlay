@@ -240,24 +240,12 @@
 
       let allCategory = ``;
 
-      const processChild = (result) => {
-        result.forEach((data) => {
-          if (data.child.length == 0) {
-            allCategory += showProduct(data);
-          } else if (data.child.length != 0) {
-            allCategory += showProduct(data);
-            processChild(data.child);
-          }
-        });
-      };
-
       const processCategory = (result) => {
         result.forEach((data) => {
-          if (data.child.length == 0) {
             allCategory += showProduct(data);
-          } else if (data.child.length != 0) {
-            allCategory += showProduct(data);
-            processChild(data.child);
+          
+          if (data.child.length != 0) {
+            processCategory(data.child);
           }
         });
         // console.log(allCategory);
