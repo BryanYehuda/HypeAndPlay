@@ -40,11 +40,11 @@
       />
     <link
       rel="stylesheet"
-      href="../vendor/OwlCarousel2-2.3.4/dist/assets/owl.carousel.css"
+      href="../vendor/OwlCarousel2-2.3.4/docs/assets/owlcarousel/assets/owl.carousel.css"
       />
     <link
       rel="stylesheet"
-      href="../vendor/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css"
+      href="../vendor/OwlCarousel2-2.3.4/docs/assets/owlcarousel/assets/owl.carousel.css"
       />
     <!-- Link Ends -->
     <!-- Icon Starts -->
@@ -261,7 +261,67 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">...</div>
+          <div class="modal-body">
+
+            <!-- Filter Components Starts -->
+            <div class="list-group">
+              <a href="#mobile-category" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div
+                  class="d-flex w-100 justify-content-start align-items-center">
+                  <span class="fa fa-user fa-fw mr-3"></span>
+                  <span class="menu-collapsed">Category</span>
+                  <span class="submenu-icon ml-auto"></span>
+                </div>
+              </a>
+              <div id="mobile-category" class="collapse sidebar-submenu">
+              </div>
+              <a
+                href="#prices"
+                data-toggle="collapse"
+                aria-expanded="false"
+                class="list-group-item list-group-item-action flex-column
+                align-items-start">
+                <div
+                  class="d-flex w-100 justify-content-start align-items-center">
+                  <span class="fa fa-user fa-fw mr-3"></span>
+                  <span class="menu-collapsed">Prices</span>
+                  <span class="submenu-icon ml-auto"></span>
+                </div>
+              </a>
+              <div id="prices" class="collapse form-control-sidebar">
+                <input
+                  class="form-control form-control-sm mr-sm-2
+                  form-control-sidebar-font mb-2 minimum"
+                  type="minimum"
+                  placeholder="Minimum"
+                  aria-label="Minimum"
+                  name="minimum"
+                  />
+                <button
+                  class="btn btn-block btn-outline-light btn-sm my-2 my-sm-0
+                  btn-navbar mt-2"
+                  onclick="event.preventDefault(); searchByPrice()">
+                  Search
+                </button>
+                <input
+                  class="form-control form-control-sm mr-sm-2
+                  form-control-sidebar-font mt-2 mb-2 maximum"
+                  type="maximum"
+                  placeholder="Maximum"
+                  aria-label="Maximum"
+                  name="maximum"
+                  />
+                <button
+                  class="btn btn-block btn-outline-light btn-sm my-2 my-sm-0
+                  btn-navbar mt-2"
+                  onclick="event.preventDefault(); searchByPrice()">
+                  Search
+                </button>
+              </div>
+            </div>
+            <!-- Filter Components Ends -->
+            
+          </div>
         </div>
       </div>
     </div>
@@ -291,37 +351,7 @@
                 <span class="submenu-icon ml-auto"></span>
               </div>
             </a>
-            <div id="category" class="collapse sidebar-submenu">
-              <a href="#category2" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action flex-column align-items-start">
-                <div
-                  class="d-flex w-100 justify-content-start align-items-center">
-                  <span class="fa fa-user fa-fw mr-3"></span>
-                  <span class="menu-collapsed">Category Child 1</span>
-                  <span class="submenu-icon ml-auto"></span>
-                </div>
-              </a>
-              <div id="category2" class="collapse sidebar-submenu">
-                <a href="#category3" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action flex-column align-items-start">
-                  <div
-                    class="d-flex w-100 justify-content-start align-items-center">
-                    <span class="fa fa-user fa-fw mr-3"></span>
-                    <span class="menu-collapsed">Category Child 2</span>
-                    <span class="submenu-icon ml-auto"></span>
-                  </div>
-                </a>
-                <div id="category3" class="collapse sidebar-submenu">
-                  <a href="#category4" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action flex-column align-items-start">
-                    <div
-                      class="d-flex w-100 justify-content-start align-items-center">
-                      <span class="fa fa-user fa-fw mr-3"></span>
-                      <span class="menu-collapsed">Category Child 3</span>
-                      <span class="submenu-icon ml-auto"></span>
-                    </div>
-                  </a>
-                  <div id="category4" class="collapse sidebar-submenu"></div>
-                </div>
-              </div>
-            </div>
+            <div id="category" class="collapse sidebar-submenu"></div>
             <a
               href="#prices"
               data-toggle="collapse"
@@ -417,7 +447,7 @@
       src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
       integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
       crossorigin="anonymous"></script>
-    <script src="../vendor/OwlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>
+    <script src="../vendor/OwlCarousel2-2.3.4/docs/assets/owlcarousel/owl.carousel.min.js"></script>
     <script src="../js/sidebar.js"></script>
     <!-- Script Ends -->
     <!-- Carousel Script Starts -->
@@ -544,7 +574,7 @@
         result.forEach((data) => {
           // console.log(data);
           if (data.child.length == 0) {
-            allCategory += `<a class="dropdown-item" onclick="getDataByCat('${data.id}')">${data.category}</a>`;
+            allCategory += `<a class="dropdown-item" data-dismiss="modal" onclick="getDataByCat('${data.id}')">${data.category}</a>`;
           } else if (data.child.length != 0) {
             // processCategory(data.child);
             allCategory += `
@@ -562,6 +592,7 @@
           }
         });
         document.querySelector("#category").innerHTML = allCategory;
+        document.querySelector("#mobile-category").innerHTML = allCategory;
       };
 
       const showChild = (result) => {
@@ -572,7 +603,7 @@
             <div class="d-flex w-100 justify-content-start align-items-center">
               <span class="fa fa-user fa-fw mr-3"></span>
 
-              <a class="dropdown-item" onclick="getDataByCat('${data.id}')">${data.category}</a>
+              <a class="dropdown-item" data-dismiss="modal" onclick="getDataByCat('${data.id}')">${data.category}</a>
             </div>
               
             `;
