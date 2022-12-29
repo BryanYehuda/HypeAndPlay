@@ -39,7 +39,7 @@ class RegisterView(mixins.CreateModelMixin, viewsets.GenericViewSet):
 class CategoryViewset(viewsets.ModelViewSet):
     serializer_class = serializer.CategorySerializer
     queryset = models.Category.objects.all()
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
     def list(self, request, *args, **kwargs):
 
@@ -66,6 +66,17 @@ class CategoryViewset(viewsets.ModelViewSet):
         data = serializer.data
         data = {**data, "child" : self.get_child(data['id'])}
         return Response(data)
+    
+    def destroy(self, request, *args, **kwargs):
+        category = models.Category.objects.get(id = kwargs['pk'])
+        product = models.Product.objects.filter(category = kwargs['pk'])
+        if category.parent_category != 0:
+            product.update(category = category.parent_category)
+        else:
+            no_category = models.Category.objects.get_or_create(name_category="no_category")
+            product.update(category=no_category[0].id)
+        
+        return super().destroy(request, *args, **kwargs)
 
 
 class PromoViewset(viewsets.ModelViewSet):
@@ -90,7 +101,7 @@ class ProductViewset(viewsets.ModelViewSet):
     filterset_fields = ["category", "stock", "price"]
     search_fields = ["name"]
     ordering_fields = ("price",)
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
 
