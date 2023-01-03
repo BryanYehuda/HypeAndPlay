@@ -562,7 +562,7 @@
 
       const showDataProductFilter = (result, category) => {
         let allProduct = ``;
-        result.forEach((data) => {
+        result.reverse().forEach((data) => {
           if (data.category == category) {
             allProduct += showProduct(data);
           }
@@ -647,7 +647,7 @@
 
       const processProduct = (result) => {
         let allProduct = ``;
-        result.forEach((data) => {
+        result.reverse().forEach((data) => {
           allProduct += showProduct(data);
         });
         document.querySelector(".produkListItem").innerHTML = allProduct;
