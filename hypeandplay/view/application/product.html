@@ -418,12 +418,18 @@
           </div>
           <nav aria-label="Page navigation example" style="margin-top: 40px">
             <ul class="pagination justify-content-center">
+              <li class="page-item first" style="cursor: pointer">
+                <a class="page-link">&lt;&lt;</a>
+              </li>
               <li class="page-item previous" style="cursor: pointer">
                 <a class="page-link">Previous</a>
               </li>
               <div class="dataOther d-flex"></div>
               <li class="page-item next" style="cursor: pointer">
                 <a class="page-link">Next</a>
+              </li>
+              <li class="page-item last" style="cursor: pointer">
+                <a class="page-link">&gt;&gt;</a>
               </li>
             </ul>
           </nav>
@@ -525,37 +531,78 @@
         return product;
       };
 
+      let firstButton = document.querySelector(".first");
+      let lastButton = document.querySelector(".last");
       let nextButton = document.querySelector(".next");
       let prevButton = document.querySelector(".previous");
 
       const setPagination = (result) => {
-        prevButton.addEventListener("click", () => {
-          getProduct(result.previous);
-        });
+        let currentPage = localStorage.getItem('page')
+        currentPage = currentPage ? parseInt(currentPage) : 1
 
         let numberPage = Math.ceil(result.count / limit);
-        // console.log(numberPage);
-        let offset = 0;
         let showPage = "";
-        for (let i = 0; i < numberPage; i++) {
-          let query = `${server}/product/?limit=${limit}&offset=${offset}`;
-          offset += limit;
-          showPage += `
-         <li class="page-item" style="cursor: pointer" onclick="getProduct('${query}')">
-             <a class="page-link">${i + 1}</a>
-         </li>`;
+        
+        const batasPagination = 2
+
+        if( currentPage > 0 ){
+          prevButton.addEventListener("click", () => {
+            localStorage.setItem('page', currentPage-1);
+            getProduct(`${server}/product/?limit=${limit}&offset=${((currentPage-1)*limit)}`)
+          });
+          firstButton.addEventListener("click", () => {
+            localStorage.setItem('page', 0);
+            getProduct(`${server}/product/?limit=${limit}&offset=1`)
+          });
+          prevButton.style.display = 'block'
+          firstButton.style.display = 'block'
+        }else{
+          prevButton.style.display = 'none'
+          firstButton.style.display = 'none'
         }
+
+        if( currentPage < numberPage-1 ){
+          nextButton.addEventListener("click", () => {
+            localStorage.setItem('page', currentPage+1);
+            getProduct(`${server}/product/?limit=${limit}&offset=${((currentPage+1)*limit)}`)
+          });
+          lastButton.addEventListener("click", () => {
+            localStorage.setItem('page', numberPage-1);
+            getProduct(`${server}/product/?limit=${limit}&offset=${numberPage*limit}`)
+          });
+          nextButton.style.display = 'block'
+          lastButton.style.display = 'block'
+        }else{
+          nextButton.style.display = 'none'
+          lastButton.style.display = 'none'
+        }
+
+        for (let i = currentPage - batasPagination; i < currentPage; i++) {
+          if ( i < 0 ) continue
+          let query = `${server}/product/?limit=${limit}&offset=${(i*limit)}`;
+          showPage += `
+            <li class="page-item" style="cursor: pointer" onclick="getProduct('${query}');localStorage.setItem('page', ${i});">
+                <a class="page-link">${i+1}</a>
+            </li>`;
+        }
+
+        for (let i = currentPage; (i <= currentPage + batasPagination) && (i < numberPage); i++) {
+          let query = `${server}/product/?limit=${limit}&offset=${(i*limit)}`;
+          if(i === currentPage){
+            showPage += `
+              <li class="page-item" style="cursor: pointer;font-weight:bold" onclick="getProduct('${query}');localStorage.setItem('page', ${i});">
+                  <a class="page-link">${i+1}</a>
+              </li>`;
+          } else {
+            showPage += `
+              <li class="page-item" style="cursor: pointer" onclick="getProduct('${query}');localStorage.setItem('page', ${i});">
+                  <a class="page-link">${i+1}</a>
+              </li>`;
+          }
+        }
+
         // console.log(showPage);
         document.querySelector(".dataOther").innerHTML = showPage;
-
-        if (result.next == null) {
-          nextButton.classList.add("disabled");
-        } else {
-          nextButton.classList.remove("disabled");
-          nextButton.addEventListener("click", () => {
-            getProduct(result.next);
-          });
-        }
       };
 
       let allCategory = ``;
