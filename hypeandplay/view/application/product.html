@@ -568,7 +568,7 @@
           });
           lastButton.addEventListener("click", () => {
             localStorage.setItem('page', numberPage-1);
-            getProduct(`${server}/product/?limit=${limit}&offset=${numberPage*limit}`)
+            getProduct(`${server}/product/?limit=${limit}&offset=${(numberPage-1)*limit}`)
           });
           nextButton.style.display = 'block'
           lastButton.style.display = 'block'
