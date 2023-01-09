@@ -414,7 +414,6 @@
       let allCategory = ``;
 
       const processChild = (result, beforeData) => {
-        console.log(beforeData);
         result.forEach((data) => {
           if (data.child.length == 0) {
             allCategory += showCategory(data.id, beforeData)
