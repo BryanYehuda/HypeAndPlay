@@ -352,6 +352,7 @@
               </div>
             </a>
             <div id="category" class="collapse sidebar-submenu"></div>
+
             <a
               href="#prices"
               data-toggle="collapse"
@@ -605,8 +606,6 @@
         document.querySelector(".dataOther").innerHTML = showPage;
       };
 
-      let allCategory = ``;
-
       const showDataProductFilter = (result, category) => {
         let allProduct = ``;
         result.reverse().forEach((data) => {
@@ -617,26 +616,33 @@
         document.querySelector(".produkListItem").innerHTML = allProduct;
       };
 
+      const processChild = (data) => {
+        console.log(data)
+        if (data.child && data.child.length !== 0) {
+          return `
+          <a href="#category_${data.id}" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div
+              class="d-flex w-100 justify-content-start align-items-center">
+              <span class="fa fa-user fa-fw mr-3"></span>
+              <span class="menu-collapsed">${data.category}</span>
+              <span class="submenu-icon ml-auto"></span>
+            </div>
+          </a>
+          <div id="category_${data.id}" class="collapse sidebar-submenu">
+            ${data.child.map((child) => {
+              return processChild(child)
+            }).join('')}
+          </div>` 
+        } else {
+          return `<a class="dropdown-item" data-dismiss="modal" onclick="getDataByCat('${data.id}')">${data.category}</a>`
+        }
+      }
+
       const processCategory = (result) => {
+        let allCategory = ''
         result.forEach((data) => {
-          // console.log(data);
-          if (data.child.length == 0) {
-            allCategory += `<a class="dropdown-item" data-dismiss="modal" onclick="getDataByCat('${data.id}')">${data.category}</a>`;
-          } else if (data.child.length != 0) {
-            // processCategory(data.child);
-            allCategory += `
-            <a href="#category_${data.id}" onclick="getCategoryChild('${data.id}')" data-toggle="collapse" aria-expanded="false"
-              class="list-group-item list-group-item-action flex-column
-              align-items-start">
-              <div class="d-flex w-100 justify-content-start
-                align-items-center">
-                <span class="menu-collapsed">${data.category}</span>
-                <span class="submenu-icon ml-auto"></span>
-              </div>
-            </a>
-            <div id="category_${data.id}" class="collapse sidebar-submenu"></div>
-          `;
-          }
+          allCategory += processChild(data)
+          console.log(allCategory)
         });
         document.querySelector("#category").innerHTML = allCategory;
         document.querySelector("#mobile-category").innerHTML = allCategory;

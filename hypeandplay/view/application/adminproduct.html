@@ -500,12 +500,13 @@
 
       let allCategory = ``;
 
-      const processChild = (result) => {
+      const processChild = (result, beforeData) => {
         result.forEach((data) => {
           if (data.child.length == 0) {
-            allCategory += `<a class="dropdown-item" onclick="getDataByCat('${data.id}')">${data.category}</a>`;
+            allCategory += `<option value="${data.id}">${beforeData} -> ${data.category}</option>`;
           } else if (data.child.length != 0) {
-            processChild(data.child);
+            beforeData = `${beforeData} -> ${data.category}`;
+            processChild(data.child, beforeData);
           }
         });
       };
@@ -513,9 +514,11 @@
       const processCategory = (result) => {
         result.forEach((data) => {
           if (data.child.length == 0) {
-            allCategory += `<a class="dropdown-item" onclick="getDataByCat('${data.id}')">${data.category}</a>`;
+            console.log(data);
+            allCategory += `<option value="${data.id}">${data.category}</option>`;
           } else if (data.child.length != 0) {
-            processChild(data.child);
+            const beforeData = data.category;
+            processChild(data.child, beforeData);
           }
         });
         document.querySelector("#category").innerHTML = allCategory;
