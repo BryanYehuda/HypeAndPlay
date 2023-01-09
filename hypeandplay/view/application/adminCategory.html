@@ -400,30 +400,27 @@
         return fetch(url, requestOptions).then(status).then(json).catch(error);
       };
 
-      const showProduct = (data) => {
-        let product = ``;
-        const statusProduct = data.status == true ? "checked" : "";
-        product += `
-                    <tr>
-                        <td class="align-middle">${data.category}</td>
-                        <td class="align-middle">
-                            <a href="admincategoryEdit.html?id=${data.id}" style="color:white"><i class="bi bi-pencil ml-1" style="cursor:pointer"></i></a>
-                            <a><i class="bi bi-trash" style="cursor:pointer" onclick="deleteProduct('${data.id}')"></i></a>
-                        </td>
-                    </tr>
-                `;
-        return product;
+      const showCategory = (id, label) => {
+        return `
+        <tr>
+            <td class="align-middle">${label}</td>
+            <td class="align-middle">
+                <a href="admincategoryEdit.html?id=${id}" style="color:white"><i class="bi bi-pencil ml-1" style="cursor:pointer"></i></a>
+                <a><i class="bi bi-trash" style="cursor:pointer" onclick="deleteProduct('${id}')"></i></a>
+            </td>
+        </tr>`
       };
 
       let allCategory = ``;
 
-      const processChild = (result) => {
+      const processChild = (result, beforeData) => {
+        console.log(beforeData);
         result.forEach((data) => {
           if (data.child.length == 0) {
-            allCategory += showProduct(data);
+            allCategory += showCategory(data.id, beforeData)
           } else if (data.child.length != 0) {
-            allCategory += showProduct(data);
-            processChild(data.child);
+            beforeData = `${beforeData} -> ${data.category}`;
+            processChild(data.child, beforeData);
           }
         });
       };
@@ -431,14 +428,14 @@
       const processCategory = (result) => {
         result.forEach((data) => {
           if (data.child.length == 0) {
-            allCategory += showProduct(data);
+            allCategory += showCategory(data.id, data.category)
           } else if (data.child.length != 0) {
-            allCategory += showProduct(data);
-            processChild(data.child);
+            const beforeData = data.category;
+            processChild(data.child, beforeData);
           }
         });
         document.querySelector(".productListItem").innerHTML = allCategory;
-      };
+      }
 
       const getProduct = (query) => {
         fetchAPI(query, "GET")
