@@ -498,31 +498,30 @@
         }
       };
 
-      let allCategory = ``;
-
-      const processChild = (result, beforeData) => {
-        result.forEach((data) => {
-          if (data.child.length == 0) {
-            allCategory += `<option value="${data.id}">${beforeData} -> ${data.category}</option>`;
-          } else if (data.child.length != 0) {
-            beforeData = `${beforeData} -> ${data.category}`;
-            processChild(data.child, beforeData);
-          }
-        });
+      const showCategory = (id, label) => {
+        return `<a class="dropdown-item" onclick="getDataByCat('${id}')">${label}</a>`
       };
+
+      const processChild = (data, beforeData) => {
+        if (data.child && data.child.length !== 0) {
+          let temp = ''
+          data.child.forEach((child) => {
+            temp += processChild(child, `${beforeData} -> ${child.category}`)
+          })
+          return temp
+        } else {
+          return showCategory(data.id, beforeData)
+        }
+      }
 
       const processCategory = (result) => {
+        let allCategory = ``;
         result.forEach((data) => {
-          if (data.child.length == 0) {
-            console.log(data);
-            allCategory += `<option value="${data.id}">${data.category}</option>`;
-          } else if (data.child.length != 0) {
-            const beforeData = data.category;
-            processChild(data.child, beforeData);
-          }
-        });
-        document.querySelector("#category").innerHTML = allCategory;
-      };
+          allCategory += processChild(data, data.category)
+        })
+        
+        document.querySelector("#category").innerHTML = allCategory
+      }
 
       const getDataByCat = (category) => {
         fetchAPI(`${server}/product/`, "GET")

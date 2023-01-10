@@ -449,33 +449,31 @@
         return fetch(url, requestOptions).then(status).then(json).catch(error);
       };
 
-      let allCategory = ``;
-
-      const processChild = (result, beforeData) => {
-        result.forEach((data) => {
-          if (data.child.length == 0) {
-            allCategory += `<option value="${data.id}">${beforeData} -> ${data.category}</option>`;
-          } else if (data.child.length != 0) {
-            beforeData = `${beforeData} -> ${data.category}`;
-            processChild(data.child, beforeData);
-          }
-        });
+      const showCategory = (id, label) => {
+        return `<option value="${id}">${label}</option>`
       };
+
+      const processChild = (data, beforeData) => {
+        if (data.child && data.child.length !== 0) {
+          let temp = ''
+          temp += showCategory(data.id, beforeData)
+          data.child.forEach((child) => {
+            temp += processChild(child, `${beforeData} -> ${child.category}`)
+          })
+          return temp
+        } else {
+          return showCategory(data.id, beforeData)
+        }
+      }
 
       const processCategory = (result) => {
+        let allCategory = ``;
         result.forEach((data) => {
-          if (data.child.length == 0) {
-            console.log(data);
-            allCategory += `<option value="${data.id}">${data.category}</option>`;
-          } else if (data.child.length != 0) {
-            const beforeData = data.category;
-            processChild(data.child, beforeData);
-          }
-        });
-
-        // console.log(allCategory)
-        document.querySelector("#category").innerHTML = allCategory;
-      };
+          allCategory += processChild(data, data.category)
+        })
+        
+        document.querySelector("#category").innerHTML = allCategory
+      }
 
       const showPromo = (result) => {
         let allPromo = ``;

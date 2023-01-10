@@ -617,7 +617,6 @@
       };
 
       const processChild = (data) => {
-        console.log(data)
         if (data.child && data.child.length !== 0) {
           return `
           <a href="#category_${data.id}" data-toggle="collapse" aria-expanded="false" class="list-group-item list-group-item-action flex-column align-items-start">
@@ -630,6 +629,7 @@
           </a>
           <div id="category_${data.id}" class="collapse sidebar-submenu">
             ${data.child.map((child) => {
+              console.log(child)
               return processChild(child)
             }).join('')}
           </div>` 
@@ -642,7 +642,6 @@
         let allCategory = ''
         result.forEach((data) => {
           allCategory += processChild(data)
-          console.log(allCategory)
         });
         document.querySelector("#category").innerHTML = allCategory;
         document.querySelector("#mobile-category").innerHTML = allCategory;

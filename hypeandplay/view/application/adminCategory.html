@@ -411,29 +411,26 @@
         </tr>`
       };
 
-      let allCategory = ``;
-
-      const processChild = (result, beforeData) => {
-        result.forEach((data) => {
-          if (data.child.length == 0) {
-            allCategory += showCategory(data.id, beforeData)
-          } else if (data.child.length != 0) {
-            beforeData = `${beforeData} -> ${data.category}`;
-            processChild(data.child, beforeData);
-          }
-        });
-      };
+      const processChild = (data, beforeData) => {
+        if (data.child && data.child.length !== 0) {
+          let temp = ''
+          temp += showCategory(data.id, beforeData)
+          data.child.forEach((child) => {
+            temp += processChild(child, `${beforeData} -> ${child.category}`)
+          })
+          return temp
+        } else {
+          return showCategory(data.id, beforeData)
+        }
+      }
 
       const processCategory = (result) => {
+        let allCategory = ``;
         result.forEach((data) => {
-          if (data.child.length == 0) {
-            allCategory += showCategory(data.id, data.category)
-          } else if (data.child.length != 0) {
-            const beforeData = data.category;
-            processChild(data.child, beforeData);
-          }
-        });
-        document.querySelector(".productListItem").innerHTML = allCategory;
+          allCategory += processChild(data, data.category)
+        })
+        
+        document.querySelector(".productListItem").innerHTML = allCategory
       }
 
       const getProduct = (query) => {
